@@ -357,6 +357,7 @@ refund_reason = "退款原因:\n" \
                 "{reason}"
 
 # Info: informazioni sul bot
+# TODO 
 bot_info = '此机器人正在使用 <a href="https://github.com/Steffo99/TGgreed">TGgreed</a>,' \
            ' @Steffo框架下的Telegram支付系统,中文翻译由@zhihuiyuze完成' \
            ' <a href="https://github.com/Steffo99/TGgreed/blob/master/LICENSE.txt">' \

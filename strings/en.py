@@ -356,6 +356,7 @@ refund_reason = "Refund reason:\n" \
                 "{reason}"
 
 # Info: informazioni sul bot
+# TODO 
 bot_info = 'This bot is using <a href="https://github.com/Steffo99/TGgreed">TGgreed</a>,' \
            ' a framework by @Steffo for Telegram payments released under the' \
            ' <a href="https://github.com/Steffo99/TGgreed/blob/master/LICENSE.txt">' \
