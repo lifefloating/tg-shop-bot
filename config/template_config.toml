@@ -26,13 +26,13 @@ fallback_language = "zh_cn"
 # The database engine you want to use.
 # Refer to http://docs.sqlalchemy.org/en/latest/core/engines.html for the possible settings.
 # This value is ignored if you're running TGgreed via Docker, or if the DB_ENGINE environment variable is set.
-engine = "sqlite:///database.sqlite"
+engine = "sqlite:////var/lib/TGgreed/database.sqlite"
 
 
 # Telegram bot parameters
 [Telegram]
 # Your bot token goes here. Get one from https://t.me/BotFather!
-token = "123456789:YOUR_TOKEN_GOES_HERE_______________"
+token = "6112863600:AAEDsRnk6ixNG6cycz_n3eAwCOUqHIAgROQ"
 # Time in seconds before a conversation (thread) with no new messages expires
 # A lower value reduces memory usage, but can be inconvenient for the users
 conversation_timeout = 7200

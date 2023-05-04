@@ -20,7 +20,7 @@ ENTRYPOINT ["python", "-OO"]
 CMD ["core.py"]
 
 ENV PYTHONUNBUFFERED=1
-ENV CONFIG_PATH="/etc/TGgreed/config.toml"
+#ENV CONFIG_PATH="/etc/TGgreed/config.toml"
 ENV DB_ENGINE="sqlite:////var/lib/TGgreed/database.sqlite"
 
 LABEL org.opencontainers.image.title="TGgreed"
