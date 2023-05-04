@@ -1,5 +1,9 @@
 FROM python:3.10-alpine AS dependencies
-RUN apk add --update build-base python3-dev py-pip musl-dev
+RUN apk update && \
+    apk add --no-cache \
+        --repository https://dl-cdn.alpinelinux.org/alpine/v3.17/main \
+        --repository https://dl-cdn.alpinelinux.org/alpine/v3.17/community \
+        build-base python3-dev py3-pip
 
 WORKDIR /usr/src/TGgreed
 COPY ./requirements.txt ./requirements.txt
