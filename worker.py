@@ -15,7 +15,7 @@ from typing import *
 
 import requests
 import sqlalchemy
-import telegram
+import _telegram
 
 import database as db
 import localization
