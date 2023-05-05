@@ -352,14 +352,14 @@ refund_reason = ":סיבה להחזר כספי\n" \
                 "{reason}"
 
 # Info: informazioni sul bot
-bot_info = 'This bot is using <a href="https://github.com/Steffo99/TGgreed">TGgreed</a>,' \
+bot_info = 'This bot is using <a href="https://github.com/lifefloating/TGgreed">TGgreed</a>,' \
            ' a framework by @Steffo for Telegram payments released under the' \
-           ' <a href="https://github.com/Steffo99/TGgreed/blob/master/LICENSE.txt">' \
+           ' <a href="https://github.com/lifefloating/TGgreed/blob/master/LICENSE.txt">' \
            'Affero General Public License 3.0</a>.\n'
 
 # Help: guide
 help_msg = "TGgreed's guide is available at this address:\n" \
-           "https://github.com/Steffo99/TGgreed/wiki"
+           "https://github.com/lifefloating/TGgreed/wiki"
 
 # Help: contact shopkeeper
 contact_shopkeeper = "המשתמשים שיכולים לספק תמיכה הם\n" \

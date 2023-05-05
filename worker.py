@@ -7,6 +7,8 @@ import re
 import threading
 import traceback
 import uuid
+import csv
+import openpyxl
 from html import escape
 from typing import *
 
@@ -1372,8 +1374,16 @@ class Worker(threading.Thread):
                            f"{transaction.refunded if transaction.refunded is not None else ''}\n")
         # Describe the file to the user
         self.bot.send_message(self.chat.id, self.loc.get("csv_caption"))
+        # transfer into excel
+        with open(f"transactions_{self.chat.id}.csv", "w") as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            wb = openpyxl.Workbook()
+            ws = wb.active
+            for row in reader:
+                ws.append(row)
+            wb.save(f"transactions_{self.chat.id}.xlsx")
         # Reopen the file for reading
-        with open(f"transactions_{self.chat.id}.csv") as file:
+        with open(f"transactions_{self.chat.id}.xlsx") as file:
             # Send the file via a manual request to Telegram
             requests.post(f"https://api.telegram.org/bot{self.cfg['Telegram']['token']}/sendDocument",
                           files={"document": file},
@@ -1381,6 +1391,7 @@ class Worker(threading.Thread):
                                   "parse_mode": "HTML"})
         # Delete the created file
         os.remove(f"transactions_{self.chat.id}.csv")
+        os.remove(f"transactions_{self.chat.id}.xlsx")
 
     def __add_admin(self):
         """Add an administrator to the bot."""

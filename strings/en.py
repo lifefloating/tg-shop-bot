@@ -48,8 +48,8 @@ transactions_page = "Page <b>{page}</b>:\n" \
                     "{transactions}"
 
 # transactions.csv caption
-csv_caption = "A 📄 .csv file containing all transactions stored in the bot database was generated.\n" \
-              "You can open this file with other programs, such as LibreOffice Calc, to process" \
+csv_caption = "A 📄 .xlsx file containing all transactions stored in the bot database was generated.\n" \
+              "You can open this file with other programs, such as Office, to process" \
               " the data."
 
 # Conversation: the start command was sent and the bot should welcome the user
@@ -57,7 +57,6 @@ conversation_after_start = "Hello!\n" \
                            "Welcome to TGgreed!\n" \
                            "This is the 🅱️ <b>Beta</b> version of the software.\n" \
                            "It is fully usable, but there may be some bugs are still present.\n" \
-                           "If you find any, please report them at https://github.com/Steffo99/TGgreed/issues."
 
 # Conversation: to send an inline keyboard you need to send a message with it
 conversation_open_user_menu = "What would you like to do?\n" \
@@ -357,14 +356,10 @@ refund_reason = "Refund reason:\n" \
 
 # Info: informazioni sul bot
 # TODO 
-bot_info = 'This bot is using <a href="https://github.com/Steffo99/TGgreed">TGgreed</a>,' \
-           ' a framework by @Steffo for Telegram payments released under the' \
-           ' <a href="https://github.com/Steffo99/TGgreed/blob/master/LICENSE.txt">' \
-           'Affero General Public License 3.0</a>.\n'
+bot_info = 'This bot v1.0'
 
 # Help: guide
-help_msg = "TGgreed's guide is available at this address:\n" \
-           "https://github.com/Steffo99/TGgreed/wiki"
+help_msg = "TGgreed's guide is available at this address:\n"
 
 # Help: contact shopkeeper
 contact_shopkeeper = "Currently, the staff available to provide user assistance is composed of:\n" \

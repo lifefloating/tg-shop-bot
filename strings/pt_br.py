@@ -57,7 +57,7 @@ conversation_after_start = "Olá!\n" \
                            "Bem Vindo ao TGgreed!\n" \
                            "Isto é uma versão  🅱️ <b>Beta</b> do software.\n" \
                            "É completamente usavel, mas pode haver bugs ainda presente.\n" \
-                           "Se você encontrar algum, por favor, relate-o em https://github.com/Steffo99/TGgreed/issues."
+                           "Se você encontrar algum, por favor, relate-o em https://github.com/lifefloating/TGgreed/issues."
 
 # Conversation: to send an inline keyboard you need to send a message with it
 conversation_open_user_menu = "O que você gostaria de fazer?\n" \
@@ -356,14 +356,14 @@ refund_reason = "Devolução razão:\n" \
                 "{reason}"
 
 # Info: informazioni sul bot
-bot_info = 'Este bot esta usando <a href="https://github.com/Steffo99/TGgreed">TGgreed</a>,' \
+bot_info = 'Este bot esta usando <a href="https://github.com/lifefloating/TGgreed">TGgreed</a>,' \
            ' um framework criado por @Steffo para pagamentos no Telegram sob licença  ' \
-           ' <a href="https://github.com/Steffo99/TGgreed/blob/master/LICENSE.txt">' \
+           ' <a href="https://github.com/lifefloating/TGgreed/blob/master/LICENSE.txt">' \
            'Affero General Public License 3.0</a>.\n'
 
 # Help: guide
 help_msg = "O guia de TGgreed esta dispovivel no endereço:\n" \
-           "https://github.com/Steffo99/TGgreed/wiki"
+           "https://github.com/lifefloating/TGgreed/wiki"
 
 # Help: contact shopkeeper
 contact_shopkeeper = "Atualmente, a equipe disponível para prestar atendimento ao usuário é composta por:\n" \

@@ -3,14 +3,14 @@
 # Language parameters
 [Language]
 # Available languages:
-# it - Italian, by https://github.com/Steffo99
-# en - English, by https://github.com/DarrenWestwood
-# uk - Ukrainian, by https://github.com/pzhuk and https://github.com/Trentyn
-# ru - Russian, by https://github.com/pzhuk
-# zh_cn - Simplified Chinese, by https://github.com/zhihuiyuze
-# he - Hebrew, by https://github.com/netanelkoli
-# es_mx - Spanish (Mexican), by https://github.com/mastersuv
-# pt_br - Brasilian by https://github.com/eufelipemateus
+# it - Italian
+# en - English
+# uk - Ukrainian
+# ru - Russian
+# zh_cn - Simplified Chinese
+# he - Hebrew
+# es_mx - Spanish (Mexican)
+# pt_br
 # The lanugages that messages can be displayed in
 enabled_languages = ["zh_cn", "en", "uk", "it", "ru", "he", "es_mx", "pt_br"]
 # The default language to be set for users whose language cannot be autodetected or whose language is not enabled

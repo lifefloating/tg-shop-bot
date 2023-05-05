@@ -48,15 +48,14 @@ transactions_page = "Page <b>{page}</b>:\n" \
                     "{transactions}"
 
 # transactions.csv caption
-csv_caption = "生成了一个📄.csv文件,其中包含bot的数据库中多所有事物\n" \
-              "您可以使用其他程序(例如LibreOffice Calc)打开此文件并进行处理数据" \
+csv_caption = "生成了一个📄.xlsx文件,其中包含bot的数据库中多所有事物\n" \
+              "您可以使用其他程序(例如Office)打开此文件并进行处理数据" \
  \
 # Conversation: the start command was sent and the bot should welcome the user
 conversation_after_start = "您好!\n" \
                            "欢迎使用greed系统!\n" \
                            "此软件版本是🅱️ <b>的Beta</b>版本.\n" \
                            "它完全可用，但可能仍然存在一些错误.\n" \
-                           "“如果发现任何问题，请在https://github.com/Steffo99/TGgreed/issues 中报告."
 
 # Conversation: to send an inline keyboard you need to send a message with it
 conversation_open_user_menu = "您想做什么?\n" \
@@ -131,13 +130,13 @@ conversation_expired = "🕐  我有一段时间没有收到任何消息，因�
                        "如果您要开始一个新的，发送一个新的/start 命令."
 
 # User menu: order
-menu_order = "🛒 订单"
+menu_order = "🛒 商品列表"
 
 # User menu: order status
 menu_order_status = "🛍 我的订单"
 
 # User menu: add credit
-menu_add_credit = "💵 增加资金"
+menu_add_credit = "💵 充值"
 
 # User menu: bot info
 menu_bot_info = "ℹ️ 关于机器人"
@@ -147,6 +146,15 @@ menu_cash = "💵 用现金"
 
 # User menu: credit card
 menu_credit_card = "💳 用信用卡"
+
+# alipay
+menu_alipay = "💰 用支付宝"
+
+#wechat pay
+menu_wechat_pay = "💰 用微信支付"
+
+#usdt
+menu_usdt = "💰 用USDT"
 
 # Admin menu: products
 menu_products = "📝️ 产品展示"
@@ -358,14 +366,10 @@ refund_reason = "退款原因:\n" \
 
 # Info: informazioni sul bot
 # TODO 
-bot_info = '此机器人正在使用 <a href="https://github.com/Steffo99/TGgreed">TGgreed</a>,' \
-           ' @Steffo框架下的Telegram支付系统,中文翻译由@zhihuiyuze完成' \
-           ' <a href="https://github.com/Steffo99/TGgreed/blob/master/LICENSE.txt">' \
-           'Affero General Public License 3.0</a>.\n'
+bot_info = '版本 v1.0'
 
 # Help: guide
-help_msg = "greed的指南可在此地址获得(未翻译):\n" \
-           "https://github.com/Steffo99/TGgreed/wiki"
+help_msg = "greed的指南可在此地址获得(未翻译):\n"
 
 # Help: contact shopkeeper
 contact_shopkeeper = "目前可提供帮助和支持的人员包括:\n" \
