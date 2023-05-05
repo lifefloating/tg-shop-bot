@@ -104,11 +104,12 @@ conversation_live_orders_start = "您处于<b>实时订单</b>模式\n" \
                                  "客户下的所有新订单将实时显示在此聊天中," \
                                  "您可以将能够将它们标记为 ✅ 已完成." \
                                  " 或者 ✴️ 您可以退款给客户.\n" \
-                                 " 反馈</i>"
+                                 "<i> 反馈</i>"
 
 # Live orders mode: stop receiving messages
 # TODO: This string is missing.
-# conversation_live_orders_stop = ""
+conversation_live_orders_stop = "<i>Press the Stop button below this message to stop the" \
+                                " feed.</i>"
 
 # Conversation: help menu has been opened
 conversation_open_help_menu = "您需要什么样的帮助?"
