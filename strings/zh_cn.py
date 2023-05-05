@@ -394,6 +394,9 @@ success_order_created = "✅ 订单已成功发送!\n" \
 # Success: order was marked as completed
 success_order_completed = "✅ 您的订单 #{order_id} 已标记完成."
 
+error_worker_not_ready = "🕒 The conversation with the bot is currently starting.\n" \
+                         "Please, wait a few moments before sending more commands!"
+
 # Success: order was refunded successfully
 success_order_refunded = "✴️ 订单 #{order_id} 已退款."
 
