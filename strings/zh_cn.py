@@ -206,10 +206,10 @@ menu_add_to_cart = "➕ 添加"
 menu_remove_from_cart = "➖ 去除"
 
 # Menu: help menu
-menu_help = "❓ 帮助 / 支持"
+menu_help = "❓ 客服 / 我的频道"
 
 # Menu: guide
-menu_guide = "📖 指南"
+menu_guide = "📖 小店频道"
 
 # Menu: next page
 menu_next = "▶️ 下一个"
@@ -218,7 +218,7 @@ menu_next = "▶️ 下一个"
 menu_previous = "◀️ 上一个"
 
 # Menu: contact the shopkeeper
-menu_contact_shopkeeper = "👨‍💼 联系商店"
+menu_contact_shopkeeper = "👨‍💼 联系客服"
 
 # Menu: generate transactions .csv file
 menu_csv = "📄 .xlsx"
@@ -373,12 +373,19 @@ refund_reason = "退款原因:\n" \
 bot_info = '版本 v1.0'
 
 # Help: guide
-help_msg = "greed的指南可在此地址获得(未翻译):\n"
+# 小店频道
+help_msg = "https://t.me/YDXyao"
 
 # Help: contact shopkeeper
-contact_shopkeeper = "目前可提供帮助和支持的人员包括:\n" \
-                     "{shopkeepers}\n" \
-                     "<i>点击他们的姓名之一，以通过Telegranm与他们联系.</i>"
+# 联系客服
+# contact_shopkeeper = "目前可提供帮助和支持的人员包括:\n" \
+#                      "{shopkeepers}\n" \
+#                      "<i>点击他们的姓名之一，以通过Telegranm与他们联系.</i>"
+
+
+contact_shopkeeper = "目前在线的支持人员包括: \n" \
+                     "https://t.me/paiHX001 \n" \
+                        "<i>请通过Telegram与他们联系</i>"
 
 # Success: product has been added/edited to the database
 success_product_edited = "✅ 产品已成功添加/修改"

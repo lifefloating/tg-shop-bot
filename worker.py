@@ -449,9 +449,9 @@ class Worker(threading.Thread):
             # Create a keyboard with the user main menu
             keyboard = [[telegram.KeyboardButton(self.loc.get("menu_order"))],
                         [telegram.KeyboardButton(self.loc.get("menu_order_status"))],
-                        [telegram.KeyboardButton(self.loc.get("menu_add_credit"))],
-                        [telegram.KeyboardButton(self.loc.get("menu_language"))],
                         [telegram.KeyboardButton(self.loc.get("menu_help")),
+                        # [telegram.KeyboardButton(self.loc.get("menu_add_credit"))],
+                        [telegram.KeyboardButton(self.loc.get("menu_language"))],
                          telegram.KeyboardButton(self.loc.get("menu_bot_info"))]]
             # Send the previously created keyboard to the user (ensuring it can be clicked only 1 time)
             self.bot.send_message(self.chat.id,
@@ -462,9 +462,9 @@ class Worker(threading.Thread):
             selection = self.__wait_for_specific_message([
                 self.loc.get("menu_order"),
                 self.loc.get("menu_order_status"),
-                self.loc.get("menu_add_credit"),
-                self.loc.get("menu_language"),
                 self.loc.get("menu_help"),
+                # self.loc.get("menu_add_credit"),
+                self.loc.get("menu_language"),
                 self.loc.get("menu_bot_info"),
             ])
             # After the user reply, update the user data
@@ -478,9 +478,9 @@ class Worker(threading.Thread):
                 # Display the order(s) status
                 self.__order_status()
             # If the user has selected the Add Credit option...
-            elif selection == self.loc.get("menu_add_credit"):
+            # elif selection == self.loc.get("menu_add_credit"):
                 # Display the add credit menu
-                self.__add_credit_menu()
+                # self.__add_credit_menu()
             # If the user has selected the Language option...
             elif selection == self.loc.get("menu_language"):
                 # Display the language menu
