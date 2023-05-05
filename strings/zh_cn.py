@@ -100,11 +100,11 @@ conversation_confirm_cart = "🛒 您的购物车包含以下产品:\n" \
 
 # Live orders mode: start
 # TODO: This string is incomplete!
-# conversation_live_orders_start = "您处于<b>实时订单</b>模式\n" \
-#                                  "客户下的所有新订单将实时显示在此聊天中," \
-#                                  "您可以将能够将它们标记为 ✅ 已完成." \
-#                                  " 或者 ✴️ 您可以退款给客户.\n" \
-#                                  " 反馈</i>"
+conversation_live_orders_start = "您处于<b>实时订单</b>模式\n" \
+                                 "客户下的所有新订单将实时显示在此聊天中," \
+                                 "您可以将能够将它们标记为 ✅ 已完成." \
+                                 " 或者 ✴️ 您可以退款给客户.\n" \
+                                 " 反馈</i>"
 
 # Live orders mode: stop receiving messages
 # TODO: This string is missing.
@@ -271,11 +271,14 @@ ask_product_image = "🖼 您希望产品具有什么图片？\n" \
                     "<i>发送照片，或跳过此阶段不添加任何图像。</i>"
 
 # Order product: notes?
-ask_order_notes = "您想在订单上留下笔记吗？\n" \
+ask_order_notes = "请输入你要的快递&收货信息\n" \
                   "💼 这将对商店经理可见。\n" \
+                  "<font color='red'> 普通快递包邮，顺丰+18 </font> \n" \
+                  "格式为：快递 收货信息（手机号 用户名 收货地址） 例如：\n" \
+                  "中通 1781131314 张三 xx省xx市xx区xx街道 例如：\n" \
                   "\n" \
-                  "<i>发送包含您要离开的便笺的消息，或按此下面的“跳过”按钮" \
-                  " 将不留任何东西.</i>"
+                  "<i>发送包含您的快递&收货信息，或按此下面的“跳过”按钮" \
+                  " 将没有收货信息，谨慎选择</i>"
 
 # Refund product: reason?
 ask_refund_reason = " 为此退款附上原因。\n" \
