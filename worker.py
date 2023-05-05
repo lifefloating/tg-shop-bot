@@ -1,4 +1,5 @@
 import os
+import io
 import sys
 import datetime
 import logging
@@ -1383,10 +1384,11 @@ class Worker(threading.Thread):
                 ws.append(row)
             wb.save(f"transactions_{self.chat.id}.xlsx")
         # Reopen the file for reading
-        with open(f"transactions_{self.chat.id}.xlsx") as file:
+        with open(f"transactions_{self.chat.id}.xlsx", "rb") as file:
+            document = io.BytesIO(file.read())
             # Send the file via a manual request to Telegram
             requests.post(f"https://api.telegram.org/bot{self.cfg['Telegram']['token']}/sendDocument",
-                          files={"document": file},
+                          files={"document.xlsx": document},
                           params={"chat_id": self.chat.id,
                                   "parse_mode": "HTML"})
         # Delete the created file
