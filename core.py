@@ -94,7 +94,7 @@ def main():
     sed.DeferredReflection.prepare(engine)
 
     # Create a bot instance
-    bot = duckbot.factory(user_cfg)(request=_telegram.utils.request.Request(user_cfg["Telegram"]["con_pool_size"]))
+    bot = duckbot.factory(user_cfg)(request=telegram._utils.request.Request(user_cfg["Telegram"]["con_pool_size"]))
 
     # Test the specified token
     log.debug("Testing bot token...")
