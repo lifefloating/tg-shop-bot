@@ -53,15 +53,13 @@ csv_caption = "生成了一个📄.xlsx文件,其中包含bot的数据库中多�
  \
 # Conversation: the start command was sent and the bot should welcome the user
 conversation_after_start = "您好!\n" \
-                           "欢迎进入本小店!\n" \
-                           "此软件版本是🅱️ <b>的Beta</b>版本.\n" \
-                           "它完全可用，但可能仍然存在一些错误.\n" \
+                           "欢迎光临π幻想\n" \
+                           "<a href='https://t.me/YDXyao'>印度小店💊💊切克闹</a> \n" \
+                           "<a href='https://t.me/paiHX001'>我不是药神💊💊</a>"
 
 # Conversation: to send an inline keyboard you need to send a message with it
 conversation_open_user_menu = "尊敬的顾客你好，欢迎光临π幻想！\n" \
                               "\n" \
-                              "频道链接：https://t.me/YDXyao \n" \
-                              "联系客服：https://t.me/paiHX001 \n" \
                               "<i>按底部键盘上的键以选择操作.\n" \
                               "如果选项框尚未打开，则可以通过按四个小按钮来打开它." \
                               "也就是消息栏中的方块.</i> \n" \
