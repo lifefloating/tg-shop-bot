@@ -210,7 +210,7 @@ menu_previous = "◀️ Previous"
 menu_contact_shopkeeper = "👨‍💼 Contact the store"
 
 # Menu: generate transactions .csv file
-menu_csv = "📄 .csv"
+menu_csv = "📄 .xlsx"
 
 # Menu: edit admins list
 menu_edit_admins = "🏵 Edit Managers"

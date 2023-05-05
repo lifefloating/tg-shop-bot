@@ -1375,7 +1375,7 @@ class Worker(threading.Thread):
         # Describe the file to the user
         self.bot.send_message(self.chat.id, self.loc.get("csv_caption"))
         # transfer into excel
-        with open(f"transactions_{self.chat.id}.csv", "w") as csvfile:
+        with open(f"transactions_{self.chat.id}.csv", "r") as csvfile:
             reader = csv.reader(csvfile, delimiter=',')
             wb = openpyxl.Workbook()
             ws = wb.active

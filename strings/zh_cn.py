@@ -220,7 +220,7 @@ menu_previous = "◀️ 上一个"
 menu_contact_shopkeeper = "👨‍💼 联系商店"
 
 # Menu: generate transactions .csv file
-menu_csv = "📄 .csv"
+menu_csv = "📄 .xlsx"
 
 # Menu: edit admins list
 menu_edit_admins = "🏵 编辑经理"
