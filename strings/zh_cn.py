@@ -53,7 +53,7 @@ csv_caption = "生成了一个📄.xlsx文件,其中包含bot的数据库中多�
  \
 # Conversation: the start command was sent and the bot should welcome the user
 conversation_after_start = "您好!\n" \
-                           "欢迎使用greed系统!\n" \
+                           "欢迎进入本小店!\n" \
                            "此软件版本是🅱️ <b>的Beta</b>版本.\n" \
                            "它完全可用，但可能仍然存在一些错误.\n" \
 
