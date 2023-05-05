@@ -273,7 +273,7 @@ ask_product_image = "🖼 您希望产品具有什么图片？\n" \
 # Order product: notes?
 ask_order_notes = "请输入你要的快递&收货信息\n" \
                   "💼 这将对商店经理可见。\n" \
-                  "<font color='red'> 普通快递包邮，顺丰+18 </font> \n" \
+                  "*普通快递包邮，顺丰+18* \n" \
                   "格式为：快递 收货信息（手机号 用户名 收货地址） 例如：\n" \
                   "中通 1781131314 张三 xx省xx市xx区xx街道 例如：\n" \
                   "\n" \
