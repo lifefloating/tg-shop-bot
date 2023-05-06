@@ -1389,9 +1389,9 @@ class Worker(threading.Thread):
             ws = wb.active
             for row in reader:
                 ws.append(row)
-            wb.save(f"transactions_{self.chat.id}.xlsx")
+            wb.save(f"transactions_{self.chat.id}.xls")
         # Reopen the file for reading
-        with open(f"transactions_{self.chat.id}.xlsx", "rb") as file:
+        with open(f"transactions_{self.chat.id}.xls", "rb") as file:
             document = io.BytesIO(file.read())
             # Send the file via a manual request to Telegram
             requests.post(f"https://api.telegram.org/bot{self.cfg['Telegram']['token']}/sendDocument",
