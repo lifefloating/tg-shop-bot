@@ -456,13 +456,11 @@ class Worker(threading.Thread):
             # add button after text
             final_inline_keyboard = telegram.InlineKeyboardMarkup(
                     [
-                        [telegram.InlineKeyboardButton(self.loc.get("inline_channel"), callback_data="channel")],
-                        [telegram.InlineKeyboardButton(self.loc.get("inline_chatmsg"), callback_data="chatmsg")]
+                        [telegram.InlineKeyboardButton(self.loc.get("inline_channel"), url="https://t.me/YDXyao")],
+                        [telegram.InlineKeyboardButton(self.loc.get("inline_chatmsg"), url="https://t.me/paiHX001")]
                     ])
             # Send the previously created keyboard to the user (ensuring it can be clicked only 1 time)
-            self.bot.send_message(self.chat.id,
-                                  self.loc.get("conversation_open_user_menu",
-                                               credit=self.Price(self.user.credit)),
+            self.bot.send_message(self.chat.id, '',credit=self.Price(self.user.credit),
                                   reply_markup=telegram.ReplyKeyboardMarkup(keyboard, one_time_keyboard=True))
             self.bot.send_message(self.chat.id,
                                   self.loc.get("conversation_open_user_menu",

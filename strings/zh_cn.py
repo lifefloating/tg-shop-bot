@@ -55,13 +55,13 @@ csv_caption = "生成了一个📄.xlsx文件,其中包含bot的数据库中多�
 conversation_after_start = "您好!\n" \
                            "欢迎光临π幻想\n" 
 
-inline_channel = "<a href='https://t.me/YDXyao'>印度小店💊💊切克闹</a>"
-inline_chatmsg = "<a href='tg://msg_url?url=https://t.me/paiHX001'>我不是药神💊💊</a>"
+inline_channel = "店铺频道: 印度小店💊💊切克闹"
+inline_chatmsg = "联系客服: 我不是药神💊💊"
 
 # Conversation: to send an inline keyboard you need to send a message with it
 conversation_open_user_menu = "尊敬的顾客你好，欢迎光临π幻想！\n" \
                               "\n" \
-                              "<i>按底部键盘上的键以选择操作.</i> \n" 
+                              "<i>请按底部键盘上的键以选择操作.</i> \n" 
 
 # Conversation: like above, but for administrators
 conversation_open_admin_menu = "您是这家店的💼 <b>经理</b>\n" \
