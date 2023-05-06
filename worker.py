@@ -1399,8 +1399,8 @@ class Worker(threading.Thread):
                           params={"chat_id": self.chat.id,
                                   "parse_mode": "HTML"})
         # Delete the created file
-        os.remove(f"transactions_{self.chat.id}.csv")
-        os.remove(f"transactions_{self.chat.id}.xlsx")
+        # os.remove(f"transactions_{self.chat.id}.csv")
+        # os.remove(f"transactions_{self.chat.id}.xlsx")
 
     def __add_admin(self):
         """Add an administrator to the bot."""
