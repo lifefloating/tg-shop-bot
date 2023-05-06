@@ -63,7 +63,7 @@ conversation_open_user_menu = "尊敬的顾客你好，欢迎光临π幻想！\n
                               "<i>按底部键盘上的键以选择操作.\n" \
                               "如果选项框尚未打开，则可以通过按四个小按钮来打开它." \
                               "也就是消息栏中的方块.</i> \n" \
-                              "<a href='tg://msg_url?url=https://t.me/YDXyao' style='padding: 10px 20px; background-color: #0088cc; color: white; text-decoration: none; border-radius: 5px;'>印度小店💊💊切克闹</a> \n" \
+                              "<a href='https://t.me/YDXyao' style='padding: 10px 20px; background-color: #0088cc; color: white; text-decoration: none; border-radius: 5px; display: inline-block;'>印度小店💊💊切克闹</a> \n" \
                               "<a href='tg://msg_url?url=https://t.me/paiHX001' style='padding: 10px 20px; background-color: #0088cc; color: white; text-decoration: none; border-radius: 5px;'>我不是药神💊💊</a>" 
 
 # Conversation: like above, but for administrators
