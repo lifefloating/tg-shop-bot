@@ -460,12 +460,8 @@ class Worker(threading.Thread):
                         [telegram.InlineKeyboardButton(self.loc.get("inline_chatmsg"), url="https://t.me/paiHX001")]
                     ])
             # Send the previously created keyboard to the user (ensuring it can be clicked only 1 time)
-            self.bot.send_message(self.chat.id, '',credit=self.Price(self.user.credit),
-                                  reply_markup=telegram.ReplyKeyboardMarkup(keyboard, one_time_keyboard=True))
-            self.bot.send_message(self.chat.id,
-                                  self.loc.get("conversation_open_user_menu",
-                                               credit=self.Price(self.user.credit)),
-                                  reply_markup=final_inline_keyboard)
+            self.bot.send_message(self.chat.id, '', reply_markup=telegram.ReplyKeyboardMarkup(keyboard, one_time_keyboard=True))
+            self.bot.send_message(self.chat.id, self.loc.get("conversation_open_user_menu"), reply_markup=final_inline_keyboard)
             # Wait for a reply from the user
             selection = self.__wait_for_specific_message([
                 self.loc.get("menu_order"),
