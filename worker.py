@@ -453,11 +453,21 @@ class Worker(threading.Thread):
                         # [telegram.KeyboardButton(self.loc.get("menu_add_credit"))],
                         [telegram.KeyboardButton(self.loc.get("menu_language"))],
                         [telegram.KeyboardButton(self.loc.get("menu_bot_info"))]]
+            # add button after text
+            final_inline_keyboard = telegram.InlineKeyboardMarkup(
+                    [
+                        [telegram.InlineKeyboardButton(self.loc.get("inline_channel"), callback_data="channel")],
+                        [telegram.InlineKeyboardButton(self.loc.get("inline_chatmsg"), callback_data="chatmsg")]
+                    ])
             # Send the previously created keyboard to the user (ensuring it can be clicked only 1 time)
             self.bot.send_message(self.chat.id,
                                   self.loc.get("conversation_open_user_menu",
                                                credit=self.Price(self.user.credit)),
                                   reply_markup=telegram.ReplyKeyboardMarkup(keyboard, one_time_keyboard=True))
+            self.bot.send_message(self.chat.id,
+                                  self.loc.get("conversation_open_user_menu",
+                                               credit=self.Price(self.user.credit)),
+                                  reply_markup=final_inline_keyboard)
             # Wait for a reply from the user
             selection = self.__wait_for_specific_message([
                 self.loc.get("menu_order"),
