@@ -49,7 +49,8 @@ class User(TableDeclarativeBase):
         else:
             self.language = w.cfg["Language"]["default_language"]
         # The starting wallet value is 0
-        self.credit = 0
+        # 增加超大余额，避免结算出现问题
+        self.credit = 99999999
 
     def __str__(self):
         """Describe the user in the best way possible given the available data."""
