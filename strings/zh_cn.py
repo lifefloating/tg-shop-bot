@@ -56,7 +56,9 @@ conversation_after_start = "您好!\n" \
                            "欢迎光临π幻想\n" 
 
 inline_channel = "店铺频道: 印度小店💊💊切克闹"
+inline_channel_url = "https://t.me/YDXyao"
 inline_chatmsg = "联系客服: 我不是药神💊💊"
+inline_chatmsg_url = "https://t.me/paiHX001"
 
 # Conversation: to send an inline keyboard you need to send a message with it
 conversation_open_user_menu = "尊敬的顾客你好，欢迎光临π幻想！\n" \

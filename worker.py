@@ -457,8 +457,8 @@ class Worker(threading.Thread):
                 # add button after text
                 final_inline_keyboard = telegram.InlineKeyboardMarkup(
                         [
-                            [telegram.InlineKeyboardButton(self.loc.get("inline_channel"), url="https://t.me/YDXyao")],
-                            [telegram.InlineKeyboardButton(self.loc.get("inline_chatmsg"), url="https://t.me/paiHX001")]
+                            [telegram.InlineKeyboardButton(self.loc.get("inline_channel"), url=self.loc.get("inline_channel_url"))],
+                            [telegram.InlineKeyboardButton(self.loc.get("inline_chatmsg"), url=self.loc.get("inline_chatmsg_url"))]
                         ])
                 # Send the previously created keyboard to the user (ensuring it can be clicked only 1 time)
                 self.bot.send_message(self.chat.id, self.loc.get('conversation_after_start'), reply_markup=telegram.ReplyKeyboardMarkup(keyboard, one_time_keyboard=True))
@@ -915,8 +915,8 @@ class Worker(threading.Thread):
             if self.admin.receive_orders:
                 keyboard.append([self.loc.get("menu_orders")])
             if self.admin.create_transactions:
-                if self.cfg["Payments"]["Cash"]["enable_create_transaction"]:
-                    keyboard.append([self.loc.get("menu_edit_credit")])
+                # if self.cfg["Payments"]["Cash"]["enable_create_transaction"]:
+                #     keyboard.append([self.loc.get("menu_edit_credit")])
                 keyboard.append([self.loc.get("menu_transactions"), self.loc.get("menu_csv")])
             if self.admin.is_owner:
                 keyboard.append([self.loc.get("menu_edit_admins")])
@@ -928,7 +928,7 @@ class Worker(threading.Thread):
             selection = self.__wait_for_specific_message([self.loc.get("menu_products"),
                                                           self.loc.get("menu_orders"),
                                                           self.loc.get("menu_user_mode"),
-                                                          self.loc.get("menu_edit_credit"),
+                                                        #   self.loc.get("menu_edit_credit"),
                                                           self.loc.get("menu_transactions"),
                                                           self.loc.get("menu_csv"),
                                                           self.loc.get("menu_edit_admins")])
@@ -941,9 +941,9 @@ class Worker(threading.Thread):
                 # Open the orders menu
                 self.__orders_menu()
             # If the user has selected the Transactions option and has the privileges to perform the action...
-            elif selection == self.loc.get("menu_edit_credit") and self.admin.create_transactions:
-                # Open the edit credit menu
-                self.__create_transaction()
+            # elif selection == self.loc.get("menu_edit_credit") and self.admin.create_transactions:
+            #     # Open the edit credit menu
+            #     self.__create_transaction()
             # If the user has selected the User mode option and has the privileges to perform the action...
             elif selection == self.loc.get("menu_user_mode"):
                 # Tell the user how to go back to admin menu
