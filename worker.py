@@ -1206,6 +1206,8 @@ class Worker(threading.Thread):
                     continue
                 # Save the tracking number
                 order.tracking_number = reply
+                # Commit the transaction
+                self.session.commit()
                 # Update order message
                 self.bot.edit_message_text(order.text(w=self), chat_id=self.chat.id,
                                            message_id=update.message.message_id)
