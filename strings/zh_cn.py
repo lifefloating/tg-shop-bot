@@ -196,6 +196,9 @@ menu_pay = "💳 支付"
 # Menu: complete
 menu_complete = "✅ 完成"
 
+# 增加输入快递单号
+menu_edit_tracking_number = "📦 编辑快递单号"
+
 # Menu: refund
 menu_refund = "✴️ 退还"
 
@@ -355,6 +358,10 @@ notification_order_placed = "新订单是:\n" \
 
 # Notification: order has been completed
 notification_order_completed = "您的订单已完成\n" \
+                               "\n" \
+                               "{order}"
+
+notification_order_tracking_number = "您的订单快递单号是：\n" \
                                "\n" \
                                "{order}"
 

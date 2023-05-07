@@ -246,6 +246,8 @@ class Order(TableDeclarativeBase):
     notes = Column(Text)
     # Linked transaction
     transaction = relationship("Transaction", back_populates="order", uselist=False)
+    # tracking_number
+    tracking_number = Column(String)
 
     # Extra table parameters
     __tablename__ = "orders"

@@ -463,8 +463,7 @@ class Worker(threading.Thread):
                 # Send the previously created keyboard to the user (ensuring it can be clicked only 1 time)
                 self.bot.send_message(self.chat.id, self.loc.get('conversation_after_start'), reply_markup=telegram.ReplyKeyboardMarkup(keyboard, one_time_keyboard=True))
                 self.bot.send_message(self.chat.id, self.loc.get("conversation_open_user_menu", credit=self.Price(self.user.credit), conversation_open_user_menu_img=self.loc.get("conversation_open_user_menu_img")), reply_markup=final_inline_keyboard)
-                print('111111111111')
-                print(self.loc.get("conversation_open_user_menu", credit=self.Price(self.user.credit), conversation_open_user_menu_img=self.loc.get("conversation_open_user_menu_img")))
+                # print(self.loc.get("conversation_open_user_menu", credit=self.Price(self.user.credit), conversation_open_user_menu_img=self.loc.get("conversation_open_user_menu_img")))
             except Exception as e:
                 print('ERROR : ' + str(e))
             # Wait for a reply from the user
@@ -1145,6 +1144,8 @@ class Worker(threading.Thread):
         # Create the order keyboard
         order_keyboard = telegram.InlineKeyboardMarkup([[telegram.InlineKeyboardButton(self.loc.get("menu_complete"),
                                                                                        callback_data="order_complete")],
+                                                        [telegram.InlineKeyboardButton(self.loc.get("menu_edit_tracking_number"),
+                                                                                       callback_data="order_edit_tracking_number")],
                                                         [telegram.InlineKeyboardButton(self.loc.get("menu_refund"),
                                                                                        callback_data="order_refund")]])
         # Display the past pending orders
@@ -1190,6 +1191,27 @@ class Worker(threading.Thread):
                 # Notify the user of the completition
                 self.bot.send_message(order.user_id,
                                       self.loc.get("notification_order_completed",
+                                                   order=order.text(w=self, user=True)))
+            if update.data == "order_edit_tracking_number":
+                # user can input tracking number and uptade the order
+                # Ask for a tracking number
+                tracking_msg = self.bot.send_message(self.chat.id, self.loc.get("ask_tracking_number"),
+                                                     reply_markup=cancel_keyboard)
+                # Wait for a reply
+                reply = self.__wait_for_regex("(.*)", cancellable=True)
+                # If the user pressed the cancel button, cancel the refund
+                if isinstance(reply, CancelSignal):
+                    # Delete the message asking for the tracking number
+                    self.bot.delete_message(self.chat.id, tracking_msg.message_id)
+                    continue
+                # Save the tracking number
+                order.tracking_number = reply
+                # Update order message
+                self.bot.edit_message_text(order.text(w=self), chat_id=self.chat.id,
+                                           message_id=update.message.message_id)
+                # Notify the user of the completition
+                self.bot.send_message(order.user_id,
+                                      self.loc.get("notification_order_tracking_number",
                                                    order=order.text(w=self, user=True)))
             # If the user pressed the refund order button, refund the order...
             elif update.data == "order_refund":
