@@ -517,6 +517,8 @@ class Worker(threading.Thread):
                 continue
             # Send the message without the keyboard to get the message id
             message = product.send_as_message(w=self, chat_id=self.chat.id)
+            print('111111111111111111111')
+            print(self.chat.id)
             # Add the product to the cart
             cart[message['message_id']] = [product, 0]
             # Create the inline keyboard to add the product to the cart
