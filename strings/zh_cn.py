@@ -199,6 +199,8 @@ menu_complete = "✅ 完成"
 # 增加输入快递单号
 menu_edit_tracking_number = "📦 编辑快递单号"
 
+ask_tracking_number = "请输入快递单号，注意检查单号是否正确！！！"
+
 # Menu: refund
 menu_refund = "✴️ 退还"
 
