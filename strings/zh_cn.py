@@ -59,10 +59,13 @@ inline_channel = "店铺频道: 印度小店💊💊切克闹"
 inline_channel_url = "https://t.me/YDXyao"
 inline_chatmsg = "联系客服: 我不是药神💊💊"
 inline_chatmsg_url = "https://t.me/paiHX001"
+conversation_open_user_menu_img = "https://tinypic.host/images/2023/05/07/_20230507195313.jpeg"
+
 
 # Conversation: to send an inline keyboard you need to send a message with it
 conversation_open_user_menu = "尊敬的顾客你好，欢迎光临π幻想！\n" \
                               "\n" \
+                              "<a href='{conversation_open_user_menu_img}'>&#8205;</a>" \
                               "<i>请按底部键盘上的键以选择操作.</i> \n" 
 
 # Conversation: like above, but for administrators

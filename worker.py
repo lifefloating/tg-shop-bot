@@ -462,7 +462,7 @@ class Worker(threading.Thread):
                         ])
                 # Send the previously created keyboard to the user (ensuring it can be clicked only 1 time)
                 self.bot.send_message(self.chat.id, self.loc.get('conversation_after_start'), reply_markup=telegram.ReplyKeyboardMarkup(keyboard, one_time_keyboard=True))
-                self.bot.send_message(self.chat.id, self.loc.get("conversation_open_user_menu", credit=self.Price(self.user.credit)), reply_markup=final_inline_keyboard)
+                self.bot.send_message(self.chat.id, self.loc.get("conversation_open_user_menu", credit=self.Price(self.user.credit), conversation_open_user_menu_img=self.loc.get("conversation_open_user_menu_img")), reply_markup=final_inline_keyboard)
             except Exception as e:
                 print('ERROR : ' + str(e))
             # Wait for a reply from the user
