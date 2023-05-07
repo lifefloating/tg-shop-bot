@@ -1209,6 +1209,9 @@ class Worker(threading.Thread):
                 # Update order message
                 self.bot.edit_message_text(order.text(w=self), chat_id=self.chat.id,
                                            message_id=update.message.message_id)
+                # show this message to the admin
+                self.bot.send_message(self.chat.id, self.loc.get("notification_order_tracking_number",
+                                                                 order=order.text(w=self)))
                 # Notify the user of the completition
                 self.bot.send_message(order.user_id,
                                       self.loc.get("notification_order_tracking_number",

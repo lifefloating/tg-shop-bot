@@ -306,7 +306,7 @@ class OrderItem(TableDeclarativeBase):
     def text(self, w: "worker.Worker"):
         print('------1------------')
         print(self)
-        return f"{self.product.name} - {str(w.Price(self.product.price))} \n 快递单号：{self.order.tracking_number}"
+        return f"{self.product.name} - {str(w.Price(self.product.price))} \n快递单号：{self.order.tracking_number if self.order.tracking_number else '暂无'}"
 
     def __repr__(self):
         return f"<OrderItem {self.item_id}>"
