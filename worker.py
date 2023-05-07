@@ -727,6 +727,7 @@ class Worker(threading.Thread):
         order_keyboard = telegram.InlineKeyboardMarkup(
             [
                 [telegram.InlineKeyboardButton(self.loc.get("menu_complete"), callback_data="order_complete")],
+                [telegram.InlineKeyboardButton(self.loc.get("menu_edit_tracking_number"), callback_data="order_edit_tracking_number")],
                 [telegram.InlineKeyboardButton(self.loc.get("menu_refund"), callback_data="order_refund")]
             ])
         # Notify them of the new placed order
