@@ -530,7 +530,12 @@ class Worker(threading.Thread):
             inline_keyboard = telegram.InlineKeyboardMarkup(
                 [[telegram.InlineKeyboardButton(self.loc.get("menu_add_to_cart"), callback_data="cart_add")]]
             )
-
+            if page != 0:
+                # add menu_previous button
+                inline_keyboard.inline_keyboard[0].insert(0, telegram.InlineKeyboardButton(self.loc.get("menu_previous"), callback_data="cart_previous"))
+            if len(products) == 1:
+                # add menu_next button
+                inline_keyboard.inline_keyboard[0].append(telegram.InlineKeyboardButton(self.loc.get("menu_next"), callback_data="cart_next"))
             # Edit the sent message and add the inline keyboard
             if product.image is None:
                 self.bot.edit_message_text(chat_id=self.chat.id,
@@ -551,13 +556,9 @@ class Worker(threading.Thread):
                                           reply_markup=inline_keyboard)
         # Wait for user input
         while True:
-            if page != 0:
-                # add menu_previous button
-                inline_keyboard.inline_keyboard[0].insert(0, telegram.InlineKeyboardButton(self.loc.get("menu_previous"), callback_data="cart_previous"))
-            if len(products) == 1:
-                # add menu_next button
-                inline_keyboard.inline_keyboard[0].append(telegram.InlineKeyboardButton(self.loc.get("menu_next"), callback_data="cart_next"))
             callback = self.__wait_for_inlinekeyboard_callback()
+            print('000000000000')
+            print(callback.data)
             # React to the user input
             # If Previous was selected...
             if callback.data == "cart_previous" and page != 0:
