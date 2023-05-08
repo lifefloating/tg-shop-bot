@@ -517,8 +517,6 @@ class Worker(threading.Thread):
                 continue
             # Send the message without the keyboard to get the message id
             message = product.send_as_message(w=self, chat_id=self.chat.id)
-            print('111111111111111111111')
-            print(self.chat.id)
             # Add the product to the cart
             cart[message['message_id']] = [product, 0]
             # Create the inline keyboard to add the product to the cart
@@ -647,6 +645,37 @@ class Worker(threading.Thread):
             elif callback.data == "cart_done":
                 # End the loop
                 break
+            elif callback.data == "next_page":
+                # If the user is already on the last page, do nothing
+                if page == len(products) // 10:
+                    continue
+                # Otherwise, go to the next page
+                page += 1
+                # Edit the message
+                self.bot.edit_message_text(chat_id=self.chat.id,
+                                           message_id=callback.message.message_id,
+                                           text=self.loc.get("conversation_cart",
+                                                             product_list=self.__get_cart_summary(cart),
+                                                             total_cost=str(self.__get_cart_value(cart)),
+                                                             page=page,
+                                                             pages=len(products) // 10 + 1),
+                                           reply_markup=inline_keyboard)
+            elif callback.data == "prev_page":
+                # If the user is already on the first page, do nothing
+                if page == 1:
+                    continue
+                # Otherwise, go to the previous page
+                page -= 1
+                # Edit the message
+                self.bot.edit_message_text(chat_id=self.chat.id,
+                                           message_id=callback.message.message_id,
+                                           text=self.loc.get("conversation_cart",
+                                                             product_list=self.__get_cart_summary(cart),
+                                                             total_cost=str(self.__get_cart_value(cart)),
+                                                             page=page,
+                                                             pages=len(products) // 10 + 1),
+                                           reply_markup=inline_keyboard)
+                
         # Create an inline keyboard with a single skip button
         cancel = telegram.InlineKeyboardMarkup([[telegram.InlineKeyboardButton(self.loc.get("menu_skip"),
                                                                                callback_data="cmd_cancel")]])
