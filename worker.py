@@ -506,56 +506,56 @@ class Worker(threading.Thread):
         """User menu to order products from the shop."""
         log.debug("Displaying __order_menu")
         # Page number
-        page = 0
-        # Get the products list from the db
-        # add search function for seach product
-        print('page is ........ ')
-        print(page)
-        products = self.session.query(db.Product) \
-            .filter_by(deleted=False) \
-            .limit(1) \
-            .offset(1 * page) \
-            .all()
-        # Create a dict to be used as 'cart'
-        # The key is the message id of the product list
-        cart: Dict[List[db.Product, int]] = {}
-        # Initialize the products list
-        for product in products:
-            # If the product is not for sale, don't display it
-            if product.price is None:
-                continue
-            # Send the message without the keyboard to get the message id
-            message = product.send_as_message(w=self, chat_id=self.chat.id)
-            # Add the product to the cart
-            cart[message['message_id']] = [product, 0]
-            # Create the inline keyboard to add the product to the cart
-            inline_keyboard = telegram.InlineKeyboardMarkup(
-                [[telegram.InlineKeyboardButton(self.loc.get("menu_add_to_cart"), callback_data="cart_add")]]
-            )
-            if page != 0:
-                # add menu_previous button
-                inline_keyboard.inline_keyboard[0].insert(0, telegram.InlineKeyboardButton(self.loc.get("menu_previous"), callback_data="cart_previous"))
-            if len(products) == 1:
-                # add menu_next button
-                inline_keyboard.inline_keyboard[0].append(telegram.InlineKeyboardButton(self.loc.get("menu_next"), callback_data="cart_next"))
-            # Edit the sent message and add the inline keyboard
-            if product.image is None:
-                self.bot.edit_message_text(chat_id=self.chat.id,
-                                           message_id=message['message_id'],
-                                           text=product.text(w=self),
-                                           reply_markup=inline_keyboard)
-            else:
-                self.bot.edit_message_caption(chat_id=self.chat.id,
-                                              message_id=message['message_id'],
-                                              caption=product.text(w=self),
-                                              reply_markup=inline_keyboard)
-        # Create the keyboard with the cancel button
-        inline_keyboard = telegram.InlineKeyboardMarkup([[telegram.InlineKeyboardButton(self.loc.get("menu_cancel"),
-                                                                                        callback_data="cart_cancel")]])
-        # Send a message containing the button to cancel or pay
-        final_msg = self.bot.send_message(self.chat.id,
-                                          self.loc.get("conversation_cart_actions"),
-                                          reply_markup=inline_keyboard)
+        # page = 0
+        # # Get the products list from the db
+        # # add search function for seach product
+        # print('page is ........ ')
+        # print(page)
+        # products = self.session.query(db.Product) \
+        #     .filter_by(deleted=False) \
+        #     .limit(1) \
+        #     .offset(1 * page) \
+        #     .all()
+        # # Create a dict to be used as 'cart'
+        # # The key is the message id of the product list
+        # cart: Dict[List[db.Product, int]] = {}
+        # # Initialize the products list
+        # for product in products:
+        #     # If the product is not for sale, don't display it
+        #     if product.price is None:
+        #         continue
+        #     # Send the message without the keyboard to get the message id
+        #     message = product.send_as_message(w=self, chat_id=self.chat.id)
+        #     # Add the product to the cart
+        #     cart[message['message_id']] = [product, 0]
+        #     # Create the inline keyboard to add the product to the cart
+        #     inline_keyboard = telegram.InlineKeyboardMarkup(
+        #         [[telegram.InlineKeyboardButton(self.loc.get("menu_add_to_cart"), callback_data="cart_add")]]
+        #     )
+        #     if page != 0:
+        #         # add menu_previous button
+        #         inline_keyboard.inline_keyboard[0].insert(0, telegram.InlineKeyboardButton(self.loc.get("menu_previous"), callback_data="cart_previous"))
+        #     if len(products) == 1:
+        #         # add menu_next button
+        #         inline_keyboard.inline_keyboard[0].append(telegram.InlineKeyboardButton(self.loc.get("menu_next"), callback_data="cart_next"))
+        #     # Edit the sent message and add the inline keyboard
+        #     if product.image is None:
+        #         self.bot.edit_message_text(chat_id=self.chat.id,
+        #                                    message_id=message['message_id'],
+        #                                    text=product.text(w=self),
+        #                                    reply_markup=inline_keyboard)
+        #     else:
+        #         self.bot.edit_message_caption(chat_id=self.chat.id,
+        #                                       message_id=message['message_id'],
+        #                                       caption=product.text(w=self),
+        #                                       reply_markup=inline_keyboard)
+        # # Create the keyboard with the cancel button
+        # inline_keyboard = telegram.InlineKeyboardMarkup([[telegram.InlineKeyboardButton(self.loc.get("menu_cancel"),
+        #                                                                                 callback_data="cart_cancel")]])
+        # # Send a message containing the button to cancel or pay
+        # final_msg = self.bot.send_message(self.chat.id,
+        #                                   self.loc.get("conversation_cart_actions"),
+        #                                   reply_markup=inline_keyboard)
         # Wait for user input
         while True:
             page = 0
