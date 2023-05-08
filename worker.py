@@ -557,9 +557,10 @@ class Worker(threading.Thread):
         #                                   self.loc.get("conversation_cart_actions"),
         #                                   reply_markup=inline_keyboard)
         # Wait for user input
+        page = 0
+        print('page is ........ ')
+        print(page)
         while True:
-            page = 0
-            # Get the products list from the db
             # add search function for seach product
             print('page is ........ ')
             print(page)
