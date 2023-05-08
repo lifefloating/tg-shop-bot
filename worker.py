@@ -505,8 +505,15 @@ class Worker(threading.Thread):
     def __order_menu(self):
         """User menu to order products from the shop."""
         log.debug("Displaying __order_menu")
+        # Page number
+        page = 0
         # Get the products list from the db
-        products = self.session.query(db.Product).filter_by(deleted=False).all()
+        # add search function for seach product
+        products = self.session.query(db.Product) \
+            .filter_by(deleted=False) \
+            .limit(1) \
+            .offset(1 * page) \
+            .all()
         # Create a dict to be used as 'cart'
         # The key is the message id of the product list
         cart: Dict[List[db.Product, int]] = {}
@@ -523,6 +530,13 @@ class Worker(threading.Thread):
             inline_keyboard = telegram.InlineKeyboardMarkup(
                 [[telegram.InlineKeyboardButton(self.loc.get("menu_add_to_cart"), callback_data="cart_add")]]
             )
+            if page != 0:
+                # add menu_previous button
+                inline_keyboard.inline_keyboard[0].insert(0, telegram.InlineKeyboardButton(self.loc.get("menu_previous"), callback_data="cart_previous"))
+            if len(products) == 1:
+                # add menu_next button
+                inline_keyboard.inline_keyboard[0].append(telegram.InlineKeyboardButton(self.loc.get("menu_next"), callback_data="cart_next"))
+
             # Edit the sent message and add the inline keyboard
             if product.image is None:
                 self.bot.edit_message_text(chat_id=self.chat.id,
@@ -545,6 +559,14 @@ class Worker(threading.Thread):
         while True:
             callback = self.__wait_for_inlinekeyboard_callback()
             # React to the user input
+            # If Previous was selected...
+            if callback.data == "cart_previous" and page != 0:
+                # Go back one page
+                page -= 1
+            # If Next was selected...
+            elif callback.data == "cart_next" and len(products) == 1:
+                # Go to the next page
+                page += 1
             # If the cancel button has been pressed...
             if callback.data == "cart_cancel":
                 # Stop waiting for user input and go back to the previous menu
