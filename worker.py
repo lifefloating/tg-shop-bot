@@ -610,8 +610,6 @@ class Worker(threading.Thread):
                                             self.loc.get("conversation_cart_actions"),
                                             reply_markup=inline_keyboard)
             callback = self.__wait_for_inlinekeyboard_callback()
-            print('000000000000')
-            print(callback.data)
             # React to the user input
             # If Previous was selected...
             if callback.data == "cart_previous" and page != 0:
