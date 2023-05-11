@@ -11,6 +11,7 @@ import duckbot
 import localization
 import nuconfig
 import worker
+import threading
 
 try:
     import coloredlogs
@@ -90,7 +91,7 @@ def flask_api():
     except KeyboardInterrupt:
         log.info("ctrl+c Stopping service application...")
 
-def main():
+def start_bot():
     """The core code of the program. Should be run only in the main process!"""
     # Rename the main thread for presentation purposes
     threading.current_thread().name = "Core"
@@ -307,10 +308,18 @@ def main():
         if len(updates):
             # Mark them as read by increasing the update_offset
             next_update = updates[-1].update_id + 1
-        # api
-        flask_api()
+
+def start_both():
+    # 创建新线程
+    bot_thread = threading.Thread(target=start_bot)
+    # 守护线程，这将确保在主线程退出时，所有子线程都将终止。
+    bot_thread.daemon = True
+    # 启动 Bot 线程
+    bot_thread.start()
+    # 启动 Flask 应用程序
+    flask_api()
 
 
 # Run the main function only in the main process
 if __name__ == "__main__":
-    main()
+    start_both()
