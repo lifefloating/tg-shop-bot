@@ -1,6 +1,7 @@
 import logging
 import os, sys
 import threading
+import multiprocessing as mp
 
 import sqlalchemy
 import sqlalchemy.ext.declarative as sed
@@ -310,15 +311,11 @@ def start_bot():
             next_update = updates[-1].update_id + 1
 
 def start_both():
-    # 创建新线程
-    bot_thread = threading.Thread(target=start_bot)
-    # 守护线程，这将确保在主线程退出时，所有子线程都将终止。
-    bot_thread.daemon = True
-    # 启动 Bot 线程
-    bot_thread.start()
-    # 启动 Flask 应用程序
-    flask_api()
-
+   # 改用多进程实现
+    flask_process = mp.Process(target=flask_api)
+    telegram_process = mp.Process(target=start_bot)
+    flask_process.start()
+    telegram_process.start()
 
 # Run the main function only in the main process
 if __name__ == "__main__":
