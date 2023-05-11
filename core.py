@@ -26,21 +26,19 @@ import sys
 # from gevent.pywsgi import WSGIServer
 from gunicorn.app.base import BaseApplication
 import argparse
-import config
 from logger.logger import init
 from server import server
-wsgi_server = None
 log = None
 PORT = '8888'
 HOST = '127.0.0.1'
 
 def signal_handler(sig, frame):
     if sig == signal.SIGTERM:
-        log.info("Stopping df-web-service application...")
+        log.info("Stopping web-service application...")
         wsgi_server.stop()
     elif sig == signal.SIGHUP:
-        log.info("Reload config of df-web-service application...")
-        config.config.is_valid()
+        log.info("Reload config of web-service application...")
+        # config.config.is_valid()
 
 
 class StandaloneApplication(BaseApplication):
@@ -61,13 +59,8 @@ class StandaloneApplication(BaseApplication):
 
 
 def flask_api():
-    if not config.config.is_valid():
-        logger.init(True)
-        log = logging.getLogger(__name__)
-        log.error("Config parser Error")
-        sys.exit(1)
-
-    logger.init(config.config.daemon)
+    # logger.init(config.config.daemon)
+    init(True)
     log = logging.getLogger(__name__)
 
 
@@ -94,7 +87,6 @@ def flask_api():
                 'workers': 4,
             }
             StandaloneApplication(server, options).run()
-            wsgi_server.serve_forever()
     except KeyboardInterrupt:
         log.info("ctrl+c Stopping service application...")
 
