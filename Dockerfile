@@ -1,7 +1,5 @@
 FROM python:3.10-alpine AS dependencies
 
-ENV LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
-
 RUN apk update && \
     apk add --no-cache \
         --repository https://dl-cdn.alpinelinux.org/alpine/v3.17/main \
