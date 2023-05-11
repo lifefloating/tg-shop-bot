@@ -4,6 +4,7 @@ import importlib
 import json
 from flask import jsonify, make_response
 from urllib import parse
+from router import api_app
 
 
 def failReturn(status='FAIL', message=None):
@@ -17,13 +18,15 @@ def failReturn(status='FAIL', message=None):
 
 # flask server
 server = Flask(__name__)
-for file_name in os.listdir(os.path.dirname(os.path.abspath(__file__)) + '/router/'):
-    if file_name.endswith('_app.py'):
-        name = os.path.splitext(file_name)[0]
-        module = importlib.import_module(name)
-        blueprint = getattr(module, name, None)
-        if blueprint is not None:
-            server.register_blueprint(blueprint)
+
+# for file_name in os.listdir(os.path.dirname(os.path.abspath(__file__)) + '/router/'):
+#     if file_name.endswith('_app.py'):
+#         name = os.path.splitext(file_name)[0]
+#         module = importlib.import_module(name)
+#         blueprint = getattr(module, name, None)
+#         if blueprint is not None:
+
+server.register_blueprint(api_app)
 
 
 # @server.before_request

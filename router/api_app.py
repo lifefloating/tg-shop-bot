@@ -7,20 +7,20 @@ web_service_app = Blueprint(
     'api_app', __name__, url_prefix='/api')
 
 
-@api_app.route(
+@web_service_app.route(
     '/ping', methods=['GET'])
 @wrap_resp
 def ping():
     return 'hello'
 
 
-@api_app.router('posttest', methods=['POST'])
+@web_service_app.router('posttest', methods=['POST'])
 @wrap_resp
 def post_test():
     params = request.get_json(force=True)
     return  api_worker.post_method(params)
 
-@api_app.router('gettest', methods=['GET'])
+@web_service_app.router('gettest', methods=['GET'])
 @wrap_resp
 def get_test(id):
     return api_worker.get_method(id)
