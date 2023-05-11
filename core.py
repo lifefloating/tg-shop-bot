@@ -292,10 +292,10 @@ def main():
         if len(updates):
             # Mark them as read by increasing the update_offset
             next_update = updates[-1].update_id + 1
+        # api
+        flask_api()
 
 
 # Run the main function only in the main process
 if __name__ == "__main__":
     main()
-    # api
-    flask_api()
