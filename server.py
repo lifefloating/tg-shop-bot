@@ -4,17 +4,8 @@ import importlib
 import json
 from flask import jsonify, make_response
 from urllib import parse
+from utils import failReturn
 from router import api_app
-
-
-def failReturn(status='FAIL', message=None):
-    return {
-        "status": status,
-        "desc": message,
-        "data": False
-    }
-
-
 
 # flask server
 server = Flask(__name__)
