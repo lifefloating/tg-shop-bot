@@ -62,7 +62,7 @@ def teardown_request(exception):
 
 @server.errorhandler(404)
 def error_handle_404(error):
-    data = jsonify(falseReturn('SERVER_ERROR', f"{error}"))
+    data = jsonify(failReturn('SERVER_ERROR', f"{error}"))
     response = make_response(data)
     response.status_code = 404
     response.headers['Content-Type'] = 'application/json'
@@ -71,7 +71,7 @@ def error_handle_404(error):
 
 @server.errorhandler(405)
 def error_handle_405(error):
-    data = jsonify(falseReturn('SERVER_ERROR', f"{error}"))
+    data = jsonify(failReturn('SERVER_ERROR', f"{error}"))
     response = make_response(data)
     response.status_code = 405
     response.headers['Content-Type'] = 'application/json'
@@ -80,7 +80,7 @@ def error_handle_405(error):
 
 @server.errorhandler(500)
 def error_handle_500(error):
-    data = jsonify(falseReturn('SERVER_ERROR', f"{error}"))
+    data = jsonify(failReturn('SERVER_ERROR', f"{error}"))
     response = make_response(data)
     response.status_code = 500
     response.headers['Content-Type'] = 'application/json'
