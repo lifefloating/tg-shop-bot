@@ -4,7 +4,7 @@ from controller.api_worker import api_worker
 from utils import wrap_resp
 
 web_service_app = Blueprint(
-    'api_worker_app', __name__, url_prefix='/api')
+    'api_app', __name__, url_prefix='/api')
 
 
 @web_service_app.route(
