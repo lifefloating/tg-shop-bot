@@ -62,7 +62,7 @@ class StandaloneApplication(BaseApplication):
 
 def flask_api():
     # logger.init(config.config.daemon)
-    init(True, '/usr/local/services/log/tg.log')
+    init(True, '/var/lib/TGgreed/log/tg.log')
     log = logging.getLogger(__name__)
 
 

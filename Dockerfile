@@ -21,8 +21,8 @@ WORKDIR /usr/src/TGgreed
 COPY . /usr/src/TGgreed
 
 RUN mkdir -p /var/lib/TGgreed/
-RUN mkdir -p /usr/local/services/log/
-RUN touch /usr/local/services/log/tg.log
+RUN mkdir -p /var/lib/TGgreed/log/
+RUN touch /var/lib/TGgreed/log/tg.log
 
 ENTRYPOINT ["python", "-OO"]
 CMD ["core.py"]
