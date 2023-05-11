@@ -3,10 +3,8 @@ RUN apk update && \
     apk add --no-cache \
         --repository https://dl-cdn.alpinelinux.org/alpine/v3.17/main \
         --repository https://dl-cdn.alpinelinux.org/alpine/v3.17/community \
-        build-base python3-dev py3-pip
-
-# gevent dependency 
-RUN apt-get install musl-tools
+        build-base python3-dev py3-pip\
+        musl-dev
 
 WORKDIR /usr/src/TGgreed
 COPY ./requirements.txt ./requirements.txt
