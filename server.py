@@ -1,11 +1,9 @@
 from flask import Flask, g, request
 import os
-import importlib
-import json
 from flask import jsonify, make_response
 from urllib import parse
 from utils import failReturn
-from router import api_app
+from router.api_app import web_service_app
 
 # flask server
 server = Flask(__name__)
@@ -17,7 +15,7 @@ server = Flask(__name__)
 #         blueprint = getattr(module, name, None)
 #         if blueprint is not None:
 
-server.register_blueprint(api_app)
+server.register_blueprint(web_service_app)
 
 
 # @server.before_request
