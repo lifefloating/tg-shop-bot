@@ -44,9 +44,9 @@ server.register_blueprint(web_service_app)
 #     g.current = current_dict
 
 
-@server.teardown_request
-def teardown_request(exception):
-    g.session.close()
+# @server.teardown_request
+# def teardown_request(exception):
+#     g.session.close()
 
 
 @server.errorhandler(404)
