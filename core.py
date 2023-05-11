@@ -31,7 +31,7 @@ import argparse
 from logger.logger import init
 from server import server
 log = None
-PORT = '8888'
+PORT = '8080'
 HOST = '127.0.0.1'
 
 def signal_handler(sig, frame):
@@ -85,7 +85,7 @@ def flask_api():
                      str(PORT) + '...========')
             # wsgi_server = WSGIServer(('', PORT), server)
             options = {
-                'bind': '127.0.0.1:8888',
+                'bind': '127.0.0.1:8080',
                 'workers': 4,
             }
             StandaloneApplication(server, options).run()
