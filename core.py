@@ -23,7 +23,8 @@ except ImportError:
 import signal
 import logging
 import sys
-from gevent.pywsgi import WSGIServer
+# from gevent.pywsgi import WSGIServer
+from gunicorn.app.base import BaseApplication
 import argparse
 import config
 from logger.logger import init_logger
@@ -40,6 +41,23 @@ def signal_handler(sig, frame):
     elif sig == signal.SIGHUP:
         log.info("Reload config of df-web-service application...")
         config.config.is_valid()
+
+
+class StandaloneApplication(BaseApplication):
+    
+    def __init__(self, app, options=None):
+        self.options = options or {}
+        self.application = app
+        super().__init__()
+
+    def load_config(self):
+        config = {key: value for key, value in self.options.items()
+                  if key in self.cfg.settings and value is not None}
+        for key, value in config.items():
+            self.cfg.set(key.lower(), value)
+
+    def load(self):
+        return self.application
 
 
 def flask_api():
@@ -70,7 +88,12 @@ def flask_api():
         else:
             log.info('========  Starting service application listen ' +
                      str(PORT) + '...========')
-            wsgi_server = WSGIServer(('', PORT), server)
+            # wsgi_server = WSGIServer(('', PORT), server)
+            options = {
+                'bind': '127.0.0.1:8888',
+                'workers': 4,
+            }
+            StandaloneApplication(server, options).run()
             wsgi_server.serve_forever()
     except KeyboardInterrupt:
         log.info("ctrl+c Stopping service application...")

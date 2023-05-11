@@ -1,6 +1,6 @@
 # Main requirements
 flask==2.3.2
-gevent==22.10.2
+gunicorn==20.1.0
 jsonify==0.5
 python-telegram-bot==13.15
 SQLAlchemy==1.4.14
