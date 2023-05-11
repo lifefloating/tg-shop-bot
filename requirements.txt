@@ -12,7 +12,7 @@ APScheduler==3.6.3
 certifi==2022.12.7
 chardet==4.0.0
 coloredlogs==15.0
-greenlet==1.1.0
+greenlet==2.0.0
 humanfriendly==9.1
 idna==2.10
 pytz==2021.1
