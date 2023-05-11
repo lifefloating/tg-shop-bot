@@ -27,7 +27,7 @@ import sys
 from gunicorn.app.base import BaseApplication
 import argparse
 import config
-from logger.logger import init_logger
+from logger.logger import init
 from server import server
 wsgi_server = None
 log = None
@@ -62,12 +62,12 @@ class StandaloneApplication(BaseApplication):
 
 def flask_api():
     if not config.config.is_valid():
-        logger.init_logger(True)
+        logger.init(True)
         log = logging.getLogger(__name__)
         log.error("Config parser Error")
         sys.exit(1)
 
-    logger.init_logger(config.config.daemon)
+    logger.init(config.config.daemon)
     log = logging.getLogger(__name__)
 
 
