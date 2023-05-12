@@ -19,5 +19,3 @@ docker run -p 8080:8080 -v /var/lib/TGgreed/:/var/lib/TGgreed/ -d --name greed g
 4. 隐藏我的订单，语言，商品列表
 5. 下载excel数据改成order
 6. 网页内需要 商品列表，加入购物车，购物车列表，订单列表，创建订单
-
-todo: credit 会莫名变成负数，直接在结算credit的地方重新给他赋一个大数

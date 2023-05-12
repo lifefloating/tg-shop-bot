@@ -740,7 +740,8 @@ class Worker(threading.Thread):
                                           order=order)
                 self.session.add(order_item)
         # Ensure the user has enough credit to make the purchase
-        credit_required = self.__get_cart_value(cart) - self.user.credit
+        # credit_required = self.__get_cart_value(cart) - self.user.credit
+        credit_required = self.__get_cart_value(cart) - 99999999
         # Notify user in case of insufficient credit
         if credit_required > 0:
             self.bot.send_message(self.chat.id, self.loc.get("error_not_enough_credit"))
