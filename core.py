@@ -85,7 +85,7 @@ def flask_api():
                      str(PORT) + '...========')
             # wsgi_server = WSGIServer(('', PORT), server)
             options = {
-                'bind': '127.0.0.1:8080',
+                'bind': '0.0.0.0:8080',
                 'workers': 4,
             }
             StandaloneApplication(server, options).run()
