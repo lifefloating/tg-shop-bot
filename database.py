@@ -4,7 +4,7 @@ import typing
 import requests
 import telegram
 from sqlalchemy import Column, ForeignKey, UniqueConstraint
-from sqlalchemy import Integer, BigInteger, String, Text, LargeBinary, DateTime, Boolean
+from sqlalchemy import Integer, BigInteger, String, Text, LargeBinary, DateTime, Boolean, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 
@@ -145,6 +145,19 @@ class Product(TableDeclarativeBase):
         # Store the photo in the database record
         self.image = r.content
 
+
+class Cart(Base):
+    '''
+        购物车
+    '''
+    __tablename__ = 'cart'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(String(50), nullable=False)
+    product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
+    product = relationship("Product")
+    quantity = Column(Integer, nullable=False)
+    amount = Column(Float, nullable=False, default=0.0)
 
 class Transaction(TableDeclarativeBase):
     """A TGgreed wallet transaction.
