@@ -22,7 +22,7 @@ session = sqlalchemy.orm.sessionmaker(bind=engine)()
 
 class ApiWorker(object):
 
-    # 直接加入购物车，或者修改数量
+    # 直接加入购物车
     def add_cart(self, params):
         user_id = params.get('user_id')
         product_id = params.get('product_id')
