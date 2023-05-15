@@ -146,7 +146,7 @@ class Product(TableDeclarativeBase):
         self.image = r.content
 
 
-class Cart(Base):
+class Cart(TableDeclarativeBase):
     '''
         购物车
     '''
