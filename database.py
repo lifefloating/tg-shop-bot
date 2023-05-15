@@ -156,7 +156,9 @@ class Cart(Base):
     user_id = Column(String(50), nullable=False)
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
     product = relationship("Product")
+    # 数量
     quantity = Column(Integer, nullable=False)
+    # 总价格
     amount = Column(Float, nullable=False, default=0.0)
 
 class Transaction(TableDeclarativeBase):

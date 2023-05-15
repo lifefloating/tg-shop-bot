@@ -37,7 +37,7 @@ class ApiWorker(object):
         if not cart_item:
             # amount equals price * quantity
             amount = per_price * quantity
-            cart_item = db.Cart(user_id=user_id, product=product_id, quantity=quantity, amount=amount)
+            cart_item = db.Cart(user_id=user_id, product_id=product_id, quantity=quantity, amount=amount)
             session.add(cart_item)
         else:
             amount = per_price * quantity
@@ -57,7 +57,7 @@ class ApiWorker(object):
         if not user_id or not product_id:
             return jsonify({'error': 'User ID and product_id are required.'}), 400
 
-        cart_item = session.query(db.Cart).filter_by(user_id=user_id, product=product_id).first()
+        cart_item = session.query(db.Cart).filter_by(user_id=user_id, product_id=product_id).first()
 
         if not cart_item:
             return jsonify({'error': 'Cart item not found.'}), 404
