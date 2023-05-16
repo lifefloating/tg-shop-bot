@@ -86,10 +86,14 @@ class ApiWorker(object):
         for item in cart_items:
             # add product info
             # product = session.query(db.Product).filter_by(id=item.product_id).first()
-            item.product_name = item.product.name
-            item.product_price = item.product.price
-            item.product_image = item.product.image
-            cart_list.append(item)
+            cart_list.append({
+                'product_id': item.product_id,
+                'product_name': item.product.name,
+                'product_price': item.product.price,
+                'product_image': item.product.image,
+                'quantity': item.quantity,
+                'amount': item.amount
+            })
 
         session.close()
 
