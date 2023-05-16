@@ -261,7 +261,7 @@ class Order(TableDeclarativeBase):
     # Extra details specified by the purchasing user
     notes = Column(Text)
     # Linked transaction
-    transaction = relationship("Transaction", back_populates="order", uselist=False)
+    transaction = relationship("Transaction", back_populates="order", uselist=False, lazy='joined')
     # tracking_number
     tracking_number = Column(String)
     # quantity
