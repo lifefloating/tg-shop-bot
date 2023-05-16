@@ -155,32 +155,30 @@ class ApiWorker(object):
     
     # 根据传来的product_id quantity user_id 创建订单 
     def create_order(self, params):
-        user_id = params.get('user_id')
-        product_id = params.get('product_id')
-        quantity = params.get('quantity')
-        notes = params.get('notes')
-        if not notes:
-            raise ValueError('请填写备注，并且填写收货信息')
-        if not user_id or not product_id:
-            return ValueError('User ID and product_id are required.')
-        # 生成订单
-        order = db.Order(user_id=user_id, notes=notes, tracking_number='', creation_date=datetime.datetime.now(), quantity=quantity)
-        # 查询product
-        product = session.query(db.Product).filter_by(id=product_id).first()
-        session.add(order)
-        session.commit()
-        # 生成订单详情
-        order_detail = db.OrderItem(order=order, product=product)
+        with session() as sess:
+            user_id = params.get('user_id')
+            product_id = params.get('product_id')
+            quantity = params.get('quantity')
+            notes = params.get('notes')
+            if not notes:
+                raise ValueError('请填写备注，并且填写收货信息')
+            if not user_id or not product_id:
+                return ValueError('User ID and product_id are required.')
+            # 生成订单
+            order = db.Order(user_id=user_id, notes=notes, tracking_number='', creation_date=datetime.datetime.now(), quantity=quantity)
+            sess.add(order)
+            sess.commit()
+            # 查询product
+            product = sess.query(db.Product).filter_by(id=product_id).first()
+            # 生成订单详情
+            order_detail = db.OrderItem(order=order, product=product)
+            sess.add(order_detail)
+            sess.commit()
 
-        # 查询新插入的订单
-        newOrder = session.query(db.Order).filter_by(order_id=order.order_id).first()     
-
-        session.add(order_detail)
-        session.commit()
-        session.close()
+            # 查询新插入的订单
+            newOrder = sess.query(db.Order).filter_by(order_id=order.order_id).first()     
 
         return {'success': True, 'order': newOrder}
-        
 
 
 api_worker = ApiWorker()
