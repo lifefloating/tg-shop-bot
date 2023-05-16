@@ -7,6 +7,7 @@ import logging
 import queue as queuem
 import requests
 import sqlalchemy
+from sqlalchemy.orm import joinedload
 import database as db
 
 
@@ -76,7 +77,7 @@ class ApiWorker(object):
         if not user_id:
             return {'error': 'User ID is required.'}
 
-        cart_items = session.query(db.Cart).filter_by(user_id=user_id).all()
+        cart_items = session.query(db.Cart).options(joinedload(db.Cart.Product)).filter_by(user_id=user_id).all()
 
         if not cart_items:
             return {'error': 'Cart is empty.'}
@@ -84,10 +85,10 @@ class ApiWorker(object):
         cart_list = []
         for item in cart_items:
             # add product info
-            product = session.query(db.Product).filter_by(id=item.product_id).first()
-            item.product_name = product.name
-            item.product_price = product.price
-            item.product_image = product.image
+            # product = session.query(db.Product).filter_by(id=item.product_id).first()
+            item.product_name = item.product.name
+            item.product_price = item.product.price
+            item.product_image = item.product.image
             cart_list.append(item)
 
         session.close()
