@@ -155,7 +155,7 @@ class ApiWorker(object):
     
     # 根据传来的product_id quantity user_id 创建订单 
     def create_order(self, params):
-        with session() as sess:
+        with session as sess:
             user_id = params.get('user_id')
             product_id = params.get('product_id')
             quantity = params.get('quantity')
