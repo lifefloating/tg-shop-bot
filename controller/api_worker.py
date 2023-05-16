@@ -47,7 +47,8 @@ class ApiWorker(object):
         session.commit()
         session.close()
 
-        return jsonify({'success': True, 'message': f'{product_id} added to cart.'}), 200
+        # return jsonify({'success': True, 'message': f'{product_id} added to cart.'}), 200
+        return {'success': True, 'message': f'{product_id} added to cart.'}
 
     # 移除购物车
     def remove_cart(self, params):
