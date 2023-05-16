@@ -77,7 +77,7 @@ class ApiWorker(object):
         if not user_id:
             return {'error': 'User ID is required.'}
 
-        cart_items = session.query(db.Cart).options(joinedload(db.Cart.Product)).filter_by(user_id=user_id).all()
+        cart_items = session.query(db.Cart).options(joinedload(db.Cart.product)).filter_by(user_id=user_id).all()
 
         if not cart_items:
             return {'error': 'Cart is empty.'}
