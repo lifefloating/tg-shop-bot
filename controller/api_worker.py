@@ -9,6 +9,7 @@ import requests
 import sqlalchemy
 from sqlalchemy.orm import joinedload
 import database as db
+import base64
 
 
 
@@ -90,7 +91,7 @@ class ApiWorker(object):
                 'product_id': item.product_id,
                 'product_name': item.product.name,
                 'product_price': item.product.price,
-                'product_image': item.product.image,
+                'product_image': base64.b64decode((item.product.image).encode('utf-8')),
                 'quantity': item.quantity,
                 'amount': item.amount
             })

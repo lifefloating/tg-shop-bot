@@ -39,9 +39,9 @@ class LCJSONEncoder(json.JSONEncoder):
                     continue
 
                 data = obj.__getattribute__(field)
-                print('1111111111111')
-                print(type(data))
-                print(data)
+                log.info('1111111111111')
+                log.info(type(data))
+                log.info(data)
                 try:
                     if isinstance(data, datetime):
                         data = data.strftime(DATE_PATTEN)
