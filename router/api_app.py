@@ -21,14 +21,14 @@ def ping():
 
 
 # 加入购物车
-@web_service_app.route('addCart', methods=['POST'])
+@web_service_app.route('/addCart', methods=['POST'])
 @wrap_resp
 def add_cart():
     params = request.get_json(force=True)
     return  api_worker.add_cart(params)
 
 # 移除购物车
-@web_service_app.route('removeCart', methods=['POST'])
+@web_service_app.route('/removeCart', methods=['POST'])
 @wrap_resp
 def remove_cart():
     params = request.get_json(force=True)
