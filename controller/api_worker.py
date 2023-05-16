@@ -29,7 +29,7 @@ class ApiWorker(object):
         quantity = params.get('quantity')
 
         if not user_id or not product_id:
-            return jsonify({'error': 'User ID and product_id are required.'}), 400
+            return {'error': 'User ID and product_id are required.'}
 
         cart_item = session.query(db.Cart).filter_by(user_id=user_id, product_id=product_id).first()
         per_price = session.query(db.Product).filter_by(id=product_id).first().price
@@ -47,7 +47,6 @@ class ApiWorker(object):
         session.commit()
         session.close()
 
-        # return jsonify({'success': True, 'message': f'{product_id} added to cart.'}), 200
         return {'success': True, 'message': f'{product_id} added to cart.'}
 
     # 移除购物车
@@ -56,12 +55,12 @@ class ApiWorker(object):
         product_id = params.get('product_id')
 
         if not user_id or not product_id:
-            return jsonify({'error': 'User ID and product_id are required.'}), 400
+            return {'error': 'User ID and product_id are required.'}
 
         cart_item = session.query(db.Cart).filter_by(user_id=user_id, product_id=product_id).first()
 
         if not cart_item:
-            return jsonify({'error': 'Cart item not found.'}), 404
+            return {'error': 'Cart item not found.'}
 
         session.delete(cart_item)
         session.commit()
@@ -70,6 +69,30 @@ class ApiWorker(object):
         return {'success': True, 'message': f'{product_id} removed from cart.'}
 
 
+    # 购物车列表
+    def cart_list(self, params):
+        user_id = params.get('user_id')
+
+        if not user_id:
+            return {'error': 'User ID is required.'}
+
+        cart_items = session.query(db.Cart).filter_by(user_id=user_id).all()
+
+        if not cart_items:
+            return {'error': 'Cart is empty.'}
+
+        cart_list = []
+        for item in cart_items:
+            # add product info
+            product = session.query(db.Product).filter_by(id=item.product_id).first()
+            item.product_name = product.name
+            item.product_price = product.price
+            item.product_image = product.image
+            cart_list.append(item)
+
+        session.close()
+
+        return {'success': True, 'cart_list': cart_list}
 
 
 

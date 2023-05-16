@@ -33,3 +33,10 @@ def add_cart():
 def remove_cart():
     params = request.get_json(force=True)
     return  api_worker.remove_cart(params)
+
+# 购物车列表
+@web_service_app.route('/cartList', methods=['POST'])
+@wrap_resp
+def cart_list():
+    params = request.get_json(force=True)
+    return  api_worker.cart_list(params)
