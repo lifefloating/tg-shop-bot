@@ -2,7 +2,7 @@ import logging
 from functools import wraps
 from datetime import datetime
 import simplejson as json
-from flask import jsonify, make_response, g
+from flask import jsonify, make_response, g, Response
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from exceptions import (HttpException, UnauthorizedException,
                         AccessDeniedException, SQLException)
@@ -20,6 +20,9 @@ class LCJSONEncoder(json.JSONEncoder):
         if isinstance(obj, datetime):
             return obj.strftime(DATE_PATTEN)
             # SQLAlchemy class
+        elif isinstance(obj, Response):
+            # 转换 Flask 的 Response 对象
+            return json.loads(obj.data.decode("utf-8"))
         elif isinstance(obj.__class__, DeclarativeMeta):
             fields = {}
             for field in [
@@ -45,7 +48,6 @@ class LCJSONEncoder(json.JSONEncoder):
                     fields[field.upper()] = data
                 except TypeError:
                     continue
-
             return fields
         return json.JSONEncoder.default(self, obj)
 
