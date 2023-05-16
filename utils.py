@@ -7,6 +7,7 @@ from sqlalchemy.ext.declarative import DeclarativeMeta
 from exceptions import (HttpException, UnauthorizedException,
                         AccessDeniedException, SQLException)
 from schematics.exceptions import ModelConversionError, ModelValidationError
+import traceback
 
 
 log = logging.getLogger(__name__)
