@@ -169,14 +169,14 @@ class ApiWorker(object):
             sess.add(order)
             sess.commit()
             # 查询product
-            product = sess.query(db.Product).filter_by(id=product_id).first()
+            product = sess.query(db.Product).filter_by(id=product_id).one()
             # 生成订单详情
             order_detail = db.OrderItem(order=order, product=product)
             sess.add(order_detail)
             sess.commit()
 
             # 查询新插入的订单
-            newOrder = sess.query(db.Order).filter_by(order_id=order.order_id).first()     
+            newOrder = sess.query(db.Order).filter_by(order_id=order.order_id).one()     
 
         return {'success': True, 'order': newOrder}
 
