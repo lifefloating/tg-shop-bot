@@ -247,7 +247,7 @@ class Order(TableDeclarativeBase):
     order_id = Column(Integer, primary_key=True)
     # The user who placed the order
     user_id = Column(BigInteger, ForeignKey("users.user_id"))
-    user = relationship("User")
+    user = relationship("User", lazy='joined')
     # Date of creation
     creation_date = Column(DateTime, nullable=False)
     # Date of delivery
@@ -313,10 +313,10 @@ class OrderItem(TableDeclarativeBase):
     item_id = Column(Integer, primary_key=True)
     # The product that is being ordered
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
-    product = relationship("Product")
+    product = relationship("Product", lazy='joined')
     # The order in which this item is being purchased
     order_id = Column(Integer, ForeignKey("orders.order_id"), nullable=False)
-    order = relationship("Order", back_populates="items")
+    order = relationship("Order", back_populates="items", lazy='joined')
 
     # Extra table parameters
     __tablename__ = "orderitems"
