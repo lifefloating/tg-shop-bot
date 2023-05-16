@@ -91,7 +91,7 @@ class ApiWorker(object):
                 'product_id': item.product_id,
                 'product_name': item.product.name,
                 'product_price': item.product.price,
-                'product_image': base64.b64decode(item.product.image),
+                # 'product_image': base64.b64decode(item.product.image),
                 'quantity': item.quantity,
                 'amount': item.amount
             })
