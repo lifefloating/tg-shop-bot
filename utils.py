@@ -39,12 +39,15 @@ class LCJSONEncoder(json.JSONEncoder):
                     continue
 
                 data = obj.__getattribute__(field)
+                print('1111111111111')
+                print(type(data))
+                print(data)
                 try:
                     if isinstance(data, datetime):
                         data = data.strftime(DATE_PATTEN)
                     # this will fail on non-encodable values, like other
                     # classes
-                    json.dumps(data)
+                    json.dumps(data, ensure_ascii=False)
                     fields[field.upper()] = data
                 except TypeError:
                     continue
