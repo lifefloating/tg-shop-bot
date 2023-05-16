@@ -257,7 +257,7 @@ class Order(TableDeclarativeBase):
     # Refund reason: if null, product hasn't been refunded
     refund_reason = Column(Text)
     # List of items in the order
-    items: typing.List["OrderItem"] = relationship("OrderItem", back_populates="order")
+    items: typing.List["OrderItem"] = relationship("OrderItem", back_populates="order", lazy='joined')
     # Extra details specified by the purchasing user
     notes = Column(Text)
     # Linked transaction
