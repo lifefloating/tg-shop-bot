@@ -10,6 +10,7 @@ import sqlalchemy
 from sqlalchemy.orm import joinedload
 import database as db
 import base64
+import datetime
 
 
 
@@ -103,6 +104,7 @@ class ApiWorker(object):
 
 
     # 订单列表
+    # TODO 一些商品关联信息
     def order_list(self, params):
         user_id = params.get('user_id')
 
@@ -117,11 +119,9 @@ class ApiWorker(object):
         order_list = []
         for order in orders:
             order_list.append({
-                'order_id': order.id,
-                'order_date': order.created_at,
-                'order_amount': order.amount,
-                'order_status': order.status,
-                'order_creation_date': order.creation_date,
+                'order_id': order.order_id,
+                'order_date': order.creation_date,
+                'order_delivery_date': order.delivery_date,
                 'order_notes': order.notes or '',
                 'order_tracking_number': order.tracking_number or '',
             })
@@ -129,6 +129,58 @@ class ApiWorker(object):
         session.close()
 
         return {'success': True, 'order_list': order_list}
+
+    # 商品列表
+    def product_list(self, params):
+        products = session.query(db.Product).all()
+
+        if not products:
+            return {'error': 'No product found.'}
+
+        product_list = []
+        for product in products:
+            product_list.append({
+                'product_id': product.id,
+                'product_name': product.name,
+                'product_price': product.price,
+                'product_description': product.description,
+                # 'product_image': base64.b64decode(product.image),
+            })
+
+        session.close()
+
+        return {'success': True, 'product_list': product_list}
+
+
+    
+    # 根据传来的product_id quantity user_id 创建订单 
+    def create_order(self, params):
+        user_id = params.get('user_id')
+        product_id = params.get('product_id')
+        quantity = params.get('quantity')
+        notes = params.get('notes')
+        if not notes:
+            raise ValueError('请填写备注，并且填写收货信息')
+        if not user_id or not product_id:
+            return ValueError('User ID and product_id are required.')
+        # 生成订单
+        order = db.Order(user_id=user_id, notes=notes, tracking_number='', creation_date=datetime.datetime.now(), quantity=quantity)
+        # 查询product
+        product = session.query(db.Product).filter_by(id=product_id).first()
+        session.add(order)
+        session.commit()
+        # 生成订单详情
+        order_detail = db.OrderItem(order=order, product=product)
+
+        # 查询新插入的订单
+        newOrder = session.query(db.Order).filter_by(order_id=order.order_id).first()     
+
+        session.add(order_detail)
+        session.commit()
+        session.close()
+
+        return {'success': True, 'order': newOrder}
+        
 
 
 api_worker = ApiWorker()

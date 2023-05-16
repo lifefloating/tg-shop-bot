@@ -264,6 +264,8 @@ class Order(TableDeclarativeBase):
     transaction = relationship("Transaction", back_populates="order", uselist=False)
     # tracking_number
     tracking_number = Column(String)
+    # quantity
+    quantity = Column(Integer, nullable=False, default=1)
 
     # Extra table parameters
     __tablename__ = "orders"
