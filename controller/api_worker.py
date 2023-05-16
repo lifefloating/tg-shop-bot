@@ -86,11 +86,12 @@ class ApiWorker(object):
         cart_list = []
         for item in cart_items:
             # add product info
-            # product = session.query(db.Product).filter_by(id=item.product_id).first()
+            # TODO product image处理
             cart_list.append({
                 'product_id': item.product_id,
                 'product_name': item.product.name,
                 'product_price': item.product.price,
+                'product_description': item.product.description,
                 # 'product_image': base64.b64decode(item.product.image),
                 'quantity': item.quantity,
                 'amount': item.amount
@@ -100,6 +101,34 @@ class ApiWorker(object):
 
         return {'success': True, 'cart_list': cart_list}
 
+
+    # 订单列表
+    def order_list(self, params):
+        user_id = params.get('user_id')
+
+        if not user_id:
+            return {'error': 'User ID is required.'}
+
+        orders = session.query(db.Order).filter_by(user_id=user_id).all()
+
+        if not orders:
+            return {'error': 'No order found.'}
+
+        order_list = []
+        for order in orders:
+            order_list.append({
+                'order_id': order.id,
+                'order_date': order.created_at,
+                'order_amount': order.amount,
+                'order_status': order.status,
+                'order_creation_date': order.creation_date,
+                'order_notes': order.notes or '',
+                'order_tracking_number': order.tracking_number or '',
+            })
+
+        session.close()
+
+        return {'success': True, 'order_list': order_list}
 
 
 api_worker = ApiWorker()

@@ -40,3 +40,10 @@ def remove_cart():
 def cart_list():
     params = request.get_json(force=True)
     return  api_worker.cart_list(params)
+
+# 订单列表
+@web_service_app.route('/orderList', methods=['POST'])
+@wrap_resp
+def order_list():
+    params = request.get_json(force=True)
+    return  api_worker.order_list(params)
