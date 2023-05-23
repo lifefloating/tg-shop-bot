@@ -131,7 +131,7 @@ class ApiWorker(object):
         return {'success': True, 'order_list': order_list}
 
     # 商品列表
-    def product_list(self, params):
+    def product_list(self):
         products = session.query(db.Product).all()
 
         if not products:
