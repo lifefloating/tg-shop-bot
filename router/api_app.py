@@ -53,8 +53,8 @@ def order_list():
 @web_service_app.route('/productList', methods=['POST'])
 @wrap_resp
 def product_list():
-    params = request.get_json(force=True)
-    return api_worker.product_list(params)
+    # params = request.get_json(force=True)
+    return api_worker.product_list()
 
 # 创建订单
 @web_service_app.route('/order', methods=['POST'])
