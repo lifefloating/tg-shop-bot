@@ -87,13 +87,11 @@ class ApiWorker(object):
         cart_list = []
         for item in cart_items:
             # add product info
-            # TODO product image处理
             cart_list.append({
                 'product_id': item.product_id,
                 'product_name': item.product.name,
                 'product_price': item.product.price,
                 'product_description': item.product.description,
-                # 'product_image': base64.b64decode(item.product.image),
                 'product_image': base64.b64encode(item.product.image).decode('utf-8'),
                 'quantity': item.quantity,
                 'amount': item.amount
@@ -109,12 +107,12 @@ class ApiWorker(object):
         user_id = params.get('user_id')
 
         if not user_id:
-            return {'error': 'User ID is required.'}
+            raise ValueError('User ID is required.')
 
         orders = session.query(db.Order).filter_by(user_id=user_id).all()
 
         if not orders:
-            return {'error': 'No order found.'}
+            raise ValueError('No order found.')
 
         order_list = []
         for order in orders:
@@ -135,7 +133,7 @@ class ApiWorker(object):
         products = session.query(db.Product).all()
 
         if not products:
-            return {'error': 'No product found.'}
+            raise ValueError('No product found.')
 
         product_list = []
         for product in products:
@@ -157,7 +155,7 @@ class ApiWorker(object):
         products = session.query(db.Product).filter_by(id=product_id).all()
 
         if not products:
-            return {'error': 'No product found.'}
+            raise ValueError('No product found.')
 
         # create dictionary object for product detail
         product_detail = {}
