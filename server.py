@@ -1,12 +1,14 @@
 from flask import Flask, g, request
 import os
 from flask import jsonify, make_response
+from flask_cors import CORS
 from urllib import parse
 from utils import failReturn
 from router.api_app import web_service_app
 
 # flask server
 server = Flask(__name__)
+CORS(server)
 
 # for file_name in os.listdir(os.path.dirname(os.path.abspath(__file__)) + '/router/'):
 #     if file_name.endswith('_app.py'):
