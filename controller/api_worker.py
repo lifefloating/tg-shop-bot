@@ -32,7 +32,7 @@ class ApiWorker(object):
         quantity = params.get('quantity')
 
         if not user_id or not product_id:
-            return {'error': 'User ID and product_id are required.'}
+            raise ValueError('User ID and product_id are required.')
 
         cart_item = session.query(db.Cart).filter_by(user_id=user_id, product_id=product_id).first()
         per_price = session.query(db.Product).filter_by(id=product_id).first().price
@@ -58,12 +58,12 @@ class ApiWorker(object):
         product_id = params.get('product_id')
 
         if not user_id or not product_id:
-            return {'error': 'User ID and product_id are required.'}
+            raise ValueError('User ID and product_id are required.')
 
         cart_item = session.query(db.Cart).filter_by(user_id=user_id, product_id=product_id).first()
 
         if not cart_item:
-            return {'error': 'Cart item not found.'}
+            raise ValueError('Cart item not found.')
 
         session.delete(cart_item)
         session.commit()
@@ -77,12 +77,12 @@ class ApiWorker(object):
         user_id = params.get('user_id')
 
         if not user_id:
-            return {'error': 'User ID is required.'}
+            raise ValueError('User ID is required.')
 
         cart_items = session.query(db.Cart).options(joinedload(db.Cart.product)).filter_by(user_id=user_id).all()
 
         if not cart_items:
-            return {'error': 'Cart is empty.'}
+            raise ValueError('Cart is empty.')
 
         cart_list = []
         for item in cart_items:
@@ -94,6 +94,7 @@ class ApiWorker(object):
                 'product_price': item.product.price,
                 'product_description': item.product.description,
                 # 'product_image': base64.b64decode(item.product.image),
+                'product_image': base64.b64encode(item.product.image).decode('utf-8'),
                 'quantity': item.quantity,
                 'amount': item.amount
             })
@@ -104,7 +105,6 @@ class ApiWorker(object):
 
 
     # 订单列表
-    # TODO 一些商品关联信息
     def order_list(self, params):
         user_id = params.get('user_id')
 
@@ -150,6 +150,26 @@ class ApiWorker(object):
         session.close()
 
         return {'success': True, 'product_list': product_list}
+    
+     # 商品列表
+    def product_detail(self, params):
+        product_id = params.get('product_id')
+        products = session.query(db.Product).filter_by(id=product_id).all()
+
+        if not products:
+            return {'error': 'No product found.'}
+
+        # return product detail
+        product = products[0]
+        product['product_id'] = product.id,
+        product['product_name'] = product.name,
+        product['product_price'] = product.price,
+        product['product_description'] = product.description,
+        product['product_image'] =  base64.b64encode(product.image).decode('utf-8')
+
+        session.close()
+
+        return {'success': True, 'product': product}
 
 
     
@@ -163,7 +183,7 @@ class ApiWorker(object):
             if not notes:
                 raise ValueError('请填写备注，并且填写收货信息')
             if not user_id or not product_id:
-                return ValueError('User ID and product_id are required.')
+                raise ValueError('User ID and product_id are required.')
             # 生成订单
             order = db.Order(user_id=user_id, notes=notes, tracking_number='', creation_date=datetime.datetime.now(), quantity=quantity)
             sess.add(order)

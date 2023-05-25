@@ -56,6 +56,14 @@ def product_list():
     # params = request.get_json(force=True)
     return api_worker.product_list()
 
+# 商品详情
+@web_service_app.route('/productDetail', methods=['POST'])
+@wrap_resp
+def product_detail():
+    params = request.get_json(force=True)
+    return api_worker.product_detail(params)
+
+
 # 创建订单
 @web_service_app.route('/order', methods=['POST'])
 @wrap_resp
