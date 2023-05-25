@@ -159,17 +159,18 @@ class ApiWorker(object):
         if not products:
             return {'error': 'No product found.'}
 
-        # return product detail
+        # create dictionary object for product detail
+        product_detail = {}
         product = products[0]
-        product['product_id'] = product.id,
-        product['product_name'] = product.name,
-        product['product_price'] = product.price,
-        product['product_description'] = product.description,
-        product['product_image'] =  base64.b64encode(product.image).decode('utf-8')
+        product_detail['product_id'] = product.id,
+        product_detail['product_name'] = product.name,
+        product_detail['product_price'] = product.price,
+        product_detail['product_description'] = product.description,
+        product_detail['product_image'] =  base64.b64encode(product.image).decode('utf-8')
 
         session.close()
 
-        return {'success': True, 'product': product}
+        return {'success': True, 'product': product_detail}
 
 
     
