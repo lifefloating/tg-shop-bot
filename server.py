@@ -8,7 +8,6 @@ from router.api_app import web_service_app
 
 # flask server
 server = Flask(__name__)
-CORS(server)
 
 # for file_name in os.listdir(os.path.dirname(os.path.abspath(__file__)) + '/router/'):
 #     if file_name.endswith('_app.py'):
@@ -18,6 +17,7 @@ CORS(server)
 #         if blueprint is not None:
 
 server.register_blueprint(web_service_app)
+CORS(server)
 
 
 # @server.before_request
