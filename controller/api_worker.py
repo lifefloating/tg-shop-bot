@@ -162,11 +162,11 @@ class ApiWorker(object):
         product = products[0]
         print('11111111111111111111111111')
         print(product)
-        product_detail.product_id = product.id,
-        product_detail.product_name = product.name,
-        product_detail.product_price = product.price,
-        product_detail.product_description = product.description,
-        product_detail.product_image =  base64.b64encode(product.image).decode('utf-8')
+        product_detail['product_id'] = product.id,
+        product_detail['product_name'] = product.name,
+        product_detail['product_price'] = product.price,
+        product_detail['product_description'] = product.description,
+        product_detail['product_image'] =  base64.b64encode(product.image).decode('utf-8')
 
         session.close()
 
