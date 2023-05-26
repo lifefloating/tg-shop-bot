@@ -13,14 +13,6 @@ web_service_app = Blueprint(
 def ping():
     return 'hello'
 
-# TODO
-# 加入购物车
-# 购物车列表
-# 订单列表
-# 创建订单
-# 产品列表
-
-
 # 加入购物车
 @web_service_app.route('/addCart', methods=['POST'])
 @wrap_resp

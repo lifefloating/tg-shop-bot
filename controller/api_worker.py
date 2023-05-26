@@ -82,7 +82,7 @@ class ApiWorker(object):
         cart_items = session.query(db.Cart).options(joinedload(db.Cart.product)).filter_by(user_id=user_id).all()
 
         if not cart_items:
-            raise ValueError('Cart is empty.')
+            return {'success': True, 'cart_list': []}
 
         cart_list = []
         for item in cart_items:
