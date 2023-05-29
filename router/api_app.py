@@ -48,6 +48,13 @@ def product_list():
     # params = request.get_json(force=True)
     return api_worker.product_list()
 
+# 搜索商品
+@web_service_app.route('/productSearch', methods=['POST'])
+@wrap_resp
+def search_products():
+    params = request.get_json(force=True)
+    return api_worker.search_products(params)
+
 # 商品详情
 @web_service_app.route('/productDetail', methods=['POST'])
 @wrap_resp

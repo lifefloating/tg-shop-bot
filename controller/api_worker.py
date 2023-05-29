@@ -149,6 +149,29 @@ class ApiWorker(object):
 
         return {'success': True, 'product_list': product_list}
     
+    # 搜索商品
+    def search_products(self, params):
+        keyword = params.get('keyword')
+        products = session.query(db.Product).filter(db.Product.name.ilike(f"%{keyword}%")).all()
+
+        if not products:
+            raise ValueError('No product found.')
+
+        product_list = []
+        for product in products:
+            product_list.append({
+                'product_id': product.id,
+                'product_name': product.name,
+                'product_price': product.price,
+                'product_description': product.description,
+                'product_image': base64.b64encode(product.image).decode('utf-8')
+            })
+
+        session.close()
+
+        return {'success': True, 'product_list': product_list}
+
+
      # 商品列表
     def product_detail(self, params):
         product_id = params.get('product_id')
