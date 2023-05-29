@@ -77,7 +77,9 @@ class ApiWorker(object):
         user_id = params.get('user_id')
 
         if not user_id:
-            raise ValueError('User ID is required.')
+            # 网页端进来正常没user_id 兼容下 不然进来就报错
+            return {'success': True, 'cart_list': []}
+            # raise ValueError('User ID is required.')
 
         cart_items = session.query(db.Cart).options(joinedload(db.Cart.product)).filter_by(user_id=user_id).all()
 
