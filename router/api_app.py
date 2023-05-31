@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask import request
+from flask import send_from_directory
 from controller.api_worker import api_worker
 from utils import wrap_resp
 
@@ -69,3 +70,9 @@ def product_detail():
 def create_order():
     params = request.get_json(force=True)
     return api_worker.create_order(params)
+
+# 轮播图
+@web_service_app.route('/images/<path:filename>', methods=['GET'])
+@wrap_resp
+def serve_image(filename):
+    return send_from_directory('static/images', filename)
