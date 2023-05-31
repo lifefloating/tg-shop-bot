@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask import request
 from flask import send_from_directory
 from controller.api_worker import api_worker
+import os
 from utils import wrap_resp
 
 web_service_app = Blueprint(
@@ -72,6 +73,15 @@ def create_order():
     return api_worker.create_order(params)
 
 # 轮播图
-@web_service_app.route('/images/<path:filename>', methods=['GET'])
-def serve_image(filename):
-    return send_from_directory('static/images', filename)
+@web_service_app.route('/slider/<path:filename>', methods=['GET'])
+def send_image(filename):
+    return send_from_directory('static/images/slider', filename)
+
+# 返回轮播图文件名列表
+@web_service_app.route('/slider', methods=['GET'])
+@wrap_resp
+def send_slider():
+    directory = "static/images/slider"
+    files = os.listdir(directory)
+    png_files = [f for f in files if f.endswith('.png')]
+    return {'success': True, 'png_files': png_files}
