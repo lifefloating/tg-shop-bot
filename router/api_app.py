@@ -73,6 +73,5 @@ def create_order():
 
 # 轮播图
 @web_service_app.route('/images/<path:filename>', methods=['GET'])
-@wrap_resp
 def serve_image(filename):
     return send_from_directory('static/images', filename)
