@@ -157,7 +157,7 @@ class ApiWorker(object):
         products = session.query(db.Product).filter(db.Product.name.ilike(f"%{keyword}%")).all()
 
         if not products:
-            raise ValueError('No product found.')
+            return {'success': True, 'product_list': []}
 
         product_list = []
         for product in products:
