@@ -94,7 +94,7 @@ class ApiWorker(object):
                 'product_name': item.product.name,
                 'product_price': item.product.price,
                 'product_description': item.product.description,
-                'product_image': base64.b64encode(item.product.image).decode('utf-8'),
+                'product_image': base64.b64encode(item.product.image[0]).decode('utf-8'),
                 'quantity': item.quantity,
                 'amount': item.amount
             })
@@ -135,16 +135,20 @@ class ApiWorker(object):
         products = session.query(db.Product).all()
 
         if not products:
-            raise ValueError('No product found.')
+            return {'success': True, 'product_list': []}
 
         product_list = []
         for product in products:
+            image_list = []
+            for image in product.image:
+                image_data = base64.b64encode(image).decode('utf-8')
+                image_list.append(image_data)
             product_list.append({
                 'product_id': product.id,
                 'product_name': product.name,
                 'product_price': product.price,
                 'product_description': product.description,
-                'product_image': base64.b64encode(product.image).decode('utf-8')
+                'product_image': image_list
             })
 
         session.close()
@@ -161,12 +165,16 @@ class ApiWorker(object):
 
         product_list = []
         for product in products:
+            image_list = []
+            for image in product.image:
+                image_data = base64.b64encode(image).decode('utf-8')
+                image_list.append(image_data)
             product_list.append({
                 'product_id': product.id,
                 'product_name': product.name,
                 'product_price': product.price,
                 'product_description': product.description,
-                'product_image': base64.b64encode(product.image).decode('utf-8')
+                'product_image': image_list
             })
 
         session.close()
@@ -185,11 +193,15 @@ class ApiWorker(object):
         # create dictionary object for product detail
         product_detail = {}
         product = products[0]
+        image_list = []
+        for image in product.image:
+            image_data = base64.b64encode(image).decode('utf-8')
+            image_list.append(image_data)
         product_detail['product_id'] = product.id
         product_detail['product_name'] = product.name
         product_detail['product_price'] = product.price
         product_detail['product_description'] = product.description
-        product_detail['product_image'] =  base64.b64encode(product.image).decode('utf-8')
+        product_detail['product_image'] =  image_list
 
         session.close()
 
