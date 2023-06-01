@@ -4,6 +4,7 @@ import typing
 import requests
 import telegram
 from sqlalchemy import Column, ForeignKey, UniqueConstraint
+from sqlalchemy.dialects.sqlite import ARRAY
 from sqlalchemy import Integer, BigInteger, String, Text, LargeBinary, DateTime, Boolean, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
@@ -101,7 +102,8 @@ class Product(TableDeclarativeBase):
     # Product price, if null product is not for sale
     price = Column(Integer)
     # Image data
-    image = Column(LargeBinary)
+    # image = Column(LargeBinary)
+    images = Column(ARRAY(LargeBinary))
     # Product has been deleted
     deleted = Column(Boolean, nullable=False)
 
@@ -143,7 +145,9 @@ class Product(TableDeclarativeBase):
         # Download the photo through a get request
         r = requests.get(file.file_path)
         # Store the photo in the database record
-        self.image = r.content
+        # self.image = r.content
+        # 存多张图片
+        self.image.append(r.content)
 
 
 class Cart(TableDeclarativeBase):
