@@ -103,7 +103,7 @@ class Product(TableDeclarativeBase):
     price = Column(Integer)
     # Image data
     # image = Column(LargeBinary)
-    images = Column(ARRAY(LargeBinary))
+    image = Column(ARRAY(LargeBinary))
     # Product has been deleted
     deleted = Column(Boolean, nullable=False)
 
