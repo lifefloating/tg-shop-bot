@@ -59,6 +59,9 @@ inline_channel = "店铺频道: 印度小店💊💊切克闹"
 inline_channel_url = "https://t.me/YDXyao"
 inline_chatmsg = "联系客服: 我不是药神💊💊"
 inline_chatmsg_url = "https://t.me/paiHX001"
+inline_shopweb = "药房地址: 印度小店💊💊"
+inline_shopweb_url = "http://185.28.23.240:888/#/?user_id={user_id}"
+
 conversation_open_user_menu_img = "https://tinypic.host/images/2023/05/07/_20230507195313.jpeg"
 
 

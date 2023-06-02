@@ -458,7 +458,8 @@ class Worker(threading.Thread):
                 final_inline_keyboard = telegram.InlineKeyboardMarkup(
                         [
                             [telegram.InlineKeyboardButton(self.loc.get("inline_channel"), url=self.loc.get("inline_channel_url"))],
-                            [telegram.InlineKeyboardButton(self.loc.get("inline_chatmsg"), url=self.loc.get("inline_chatmsg_url"))]
+                            [telegram.InlineKeyboardButton(self.loc.get("inline_chatmsg"), url=self.loc.get("inline_chatmsg_url"))],
+                            [telegram.InlineKeyboardButton(self.loc.get("inline_shopweb"), url=self.loc.get("inline_shopweb_url", user_id=self.chat.id))]
                         ])
                 # Send the previously created keyboard to the user (ensuring it can be clicked only 1 time)
                 self.bot.send_message(self.chat.id, self.loc.get('conversation_after_start'), reply_markup=telegram.ReplyKeyboardMarkup(keyboard, one_time_keyboard=True))
