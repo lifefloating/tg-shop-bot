@@ -4,7 +4,6 @@ import typing
 import requests
 import telegram
 from sqlalchemy import Column, ForeignKey, UniqueConstraint
-from sqlalchemy.sql.sqltypes import ARRAY
 from sqlalchemy import Integer, BigInteger, String, Text, LargeBinary, DateTime, Boolean, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
@@ -102,8 +101,8 @@ class Product(TableDeclarativeBase):
     # Product price, if null product is not for sale
     price = Column(Integer)
     # Image data
-    # image = Column(LargeBinary)
-    image = Column(ARRAY(LargeBinary), default=[])
+    # 与ProductImage表的关系
+    images = relationship("ProductImage", backref="product", lazy="dynamic")
     # Product has been deleted
     deleted = Column(Boolean, nullable=False)
 
@@ -132,23 +131,44 @@ class Product(TableDeclarativeBase):
         return f"<Product {self.name}>"
 
     def send_as_message(self, w: "worker.Worker", chat_id: int) -> dict:
-        """Send a message containing the product data."""
-        if self.image is None:
-            msg = w.bot.send_message(chat_id, self.text(w))
+        """发送包含产品数据的消息。"""
+        if self.images.count() > 0:
+            msg = w.bot.send_photo(chat_id, self.images[0].data, caption=self.text(w))
         else:
-            msg = w.bot.send_photo(chat_id, self.image, caption=self.text(w))
+            msg = w.bot.send_message(chat_id, self.text(w))
         return msg.to_dict()
 
     def set_image(self, file: telegram.File):
-        """Download an image from Telegram and store it in the image column.
-        This is a slow blocking function. Try to avoid calling it directly, use a thread if possible."""
-        # Download the photo through a get request
-        r = requests.get(file.file_path)
-        # Store the photo in the database record
-        # self.image = r.content
-        # 存多张图片
-        self.image.append(r.content)
+        """从Telegram下载图像并将其存储在product_images表中。"""
+        image = ProductImage.from_file(self.id, file)
+        self.images.append(image)
 
+
+class ProductImage(TableDeclarativeBase):
+    """与产品相关联的图像。"""
+
+    # 产品图片id
+    id = Column(Integer, primary_key=True)
+    # 产品id
+    product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
+    # 图像数据
+    data = Column(LargeBinary)
+
+    # 表格参数
+    __tablename__ = "product_images"
+
+    # 不需要__init__，默认的即可
+
+    def __repr__(self):
+        return f"<ProductImage {self.id}>"
+
+    @classmethod
+    def from_file(cls, product_id: int, file: telegram.File) -> "ProductImage":
+        """从Telegram文件创建一个新的ProductImage实例。"""
+        # 通过get请求下载照片
+        r = requests.get(file.file_path)
+        # 使用下载的数据创建一个新的ProductImage实例
+        return cls(product_id=product_id, data=r.content)
 
 class Cart(TableDeclarativeBase):
     '''
