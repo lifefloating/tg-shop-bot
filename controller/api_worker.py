@@ -144,7 +144,7 @@ class ApiWorker(object):
             found = False
             for item in product_list:
                 if item['product_id'] == product.id:
-                    item['product_images'].append(base64.b64encode(product.data).decode('utf-8'))
+                    item['product_image'].append(base64.b64encode(product.data).decode('utf-8'))
                     found = True
                     break
 
@@ -154,7 +154,7 @@ class ApiWorker(object):
                     'product_name': product.name,
                     'product_price': product.price,
                     'product_description': product.description,
-                    'product_images': [base64.b64encode(product.data).decode('utf-8')] if product.data is not None else []
+                    'product_image': [base64.b64encode(product.data).decode('utf-8')] if product.data is not None else []
                 })
 
         session.close()
@@ -198,25 +198,25 @@ class ApiWorker(object):
         product_id = params.get('product_id')
         products = session.query(db.Product.id, db.Product.name, db.Product.price, db.Product.description, db.ProductImage.data)\
                         .outerjoin(db.ProductImage, db.Product.id == db.ProductImage.product_id)\
-                        .group_by(db.Product.id)\
                         .filter_by(id=product_id)\
                         .all()
 
         if not products:
             raise ValueError('No product found.')
 
-        # create dictionary object for product detail
-        product_detail = {}
-        product = products[0]
-        image_list = []
-        if product.data:
-            image_data = base64.b64encode(product.data).decode('utf-8')
-            image_list.append(image_data)
-        product_detail['product_id'] = product.id
-        product_detail['product_name'] = product.name
-        product_detail['product_price'] = product.price
-        product_detail['product_description'] = product.description
-        product_detail['product_image'] =  image_list
+        product_images = []
+        for product in products:
+            if product.data is not None:
+                image_data_encoded = base64.b64encode(product.data).decode('utf-8')
+                product_images.append(image_data_encoded)
+
+        product_detail = {
+            'product_id': products[0].id,
+            'product_name': products[0].name,
+            'product_price': products[0].price,
+            'product_description': products[0].description,
+            'product_image': product_images
+        }
 
         session.close()
 
