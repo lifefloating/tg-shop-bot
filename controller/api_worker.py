@@ -146,6 +146,7 @@ class ApiWorker(object):
             log.info('111111111111111111111')
             log.info(product.data)
             for image in product.data:
+                log.info('22222222222222222222222')
                 log.info(image)
                 if image:
                     image_data = base64.b64encode(image).decode('utf-8')
