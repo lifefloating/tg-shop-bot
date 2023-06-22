@@ -134,7 +134,6 @@ class ApiWorker(object):
     def product_list(self):
         products = session.query(db.Product.id, db.Product.name, db.Product.price, db.Product.description, db.ProductImage.data)\
                         .outerjoin(db.ProductImage, db.Product.id == db.ProductImage.product_id)\
-                        .group_by(db.Product.id)\
                         .all()
 
         if not products:
@@ -142,23 +141,21 @@ class ApiWorker(object):
 
         product_list = []
         for product in products:
-            image_list = []
-            log.info('111111111111111111111')
-            log.info(product.data)
-            for image in product.data:
-                log.info('22222222222222222222222')
-                log.info(image)
-                if image:
-                    image_bytes = image.to_bytes((image.bit_length() + 7) // 8, 'big')
-                    image_data = base64.b64encode(image_bytes).decode('utf-8')
-                    image_list.append(image_data)
-            product_list.append({
-                'product_id': product.id,
-                'product_name': product.name,
-                'product_price': product.price,
-                'product_description': product.description,
-                'product_image': image_list
-            })
+            found = False
+            for item in product_list:
+                if item['product_id'] == product.id:
+                    item['product_images'].append(base64.b64encode(product.data).decode('utf-8'))
+                    found = True
+                    break
+
+            if not found:
+                product_list.append({
+                    'product_id': product.id,
+                    'product_name': product.name,
+                    'product_price': product.price,
+                    'product_description': product.description,
+                    'product_images': [base64.b64encode(product.data).decode('utf-8')] if product.data is not None else []
+                })
 
         session.close()
 
