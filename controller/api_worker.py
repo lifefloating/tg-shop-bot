@@ -199,6 +199,7 @@ class ApiWorker(object):
         products = session.query(db.Product.id, db.Product.name, db.Product.price, db.Product.description, db.ProductImage.data)\
                         .outerjoin(db.ProductImage, db.Product.id == db.ProductImage.product_id)\
                         .filter_by(id=product_id)\
+                        .all()
 
         if not products:
             raise ValueError('product not found')
@@ -221,8 +222,12 @@ class ApiWorker(object):
                     'product_image': [base64.b64encode(product.data).decode('utf-8')] if product.data is not None else []
                 })
 
-        session.close()
+        if not product_list:
+            raise ValueError('product not found')
+
         result = product_list[0]
+
+        session.close()
 
         return {'success': True, 'product': result}
 
