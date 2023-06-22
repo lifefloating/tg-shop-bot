@@ -196,10 +196,12 @@ class ApiWorker(object):
      # 商品详情
     def product_detail(self, params):
         product_id = params.get('product_id')
-        products = session.query(db.Product)\
+        # 查询有问题，改成内存筛选
+        products = session.query(db.Product.id, db.Product.name, db.Product.price, db.Product.description, db.ProductImage.data)\
                         .outerjoin(db.ProductImage, db.Product.id == db.ProductImage.product_id)\
-                        .filter_by(id=product_id)\
                         .all()
+        
+        products = [product for product in products if product.id == product_id]
 
         if not products:
             raise ValueError('product not found')
