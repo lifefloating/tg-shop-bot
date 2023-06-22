@@ -144,8 +144,9 @@ class ApiWorker(object):
         for product in products:
             image_list = []
             for image in product.data:
-                image_data = base64.b64encode(image.data).decode('utf-8')
-                image_list.append(image_data)
+                if image:
+                    image_data = base64.b64encode(image).decode('utf-8')
+                    image_list.append(image_data)
             product_list.append({
                 'product_id': product.id,
                 'product_name': product.name,
