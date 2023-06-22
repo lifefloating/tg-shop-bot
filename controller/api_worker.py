@@ -166,7 +166,6 @@ class ApiWorker(object):
         keyword = params.get('keyword')
         products = session.query(db.Product.id, db.Product.name, db.Product.price, db.Product.description, db.ProductImage.data)\
                         .outerjoin(db.ProductImage, db.Product.id == db.ProductImage.product_id)\
-                        .group_by(db.Product.id)\
                         .filter(db.Product.name.ilike(f"%{keyword}%"))\
                         .all()
 
