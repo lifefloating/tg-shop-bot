@@ -149,7 +149,8 @@ class ApiWorker(object):
                 log.info('22222222222222222222222')
                 log.info(image)
                 if image:
-                    image_data = base64.b64encode(image).decode('utf-8')
+                    image_bytes = image.to_bytes((image.bit_length() + 7) // 8, 'big')
+                    image_data = base64.b64encode(image_bytes).decode('utf-8')
                     image_list.append(image_data)
             product_list.append({
                 'product_id': product.id,
