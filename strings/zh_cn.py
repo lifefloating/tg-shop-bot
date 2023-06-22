@@ -105,7 +105,6 @@ conversation_confirm_cart = "🛒 您的购物车包含以下产品:\n" \
                             "如果要取消，请按取消按钮.</i>"
 
 # Live orders mode: start
-# TODO: This string is incomplete!
 conversation_live_orders_start = "您处于<b>实时订单</b>模式\n" \
                                  "客户下的所有新订单将实时显示在此聊天中," \
                                  "您可以将能够将它们标记为 ✅ 已完成." \
@@ -113,7 +112,6 @@ conversation_live_orders_start = "您处于<b>实时订单</b>模式\n" \
                                  "<i> 反馈</i>"
 
 # Live orders mode: stop receiving messages
-# TODO: This string is missing.
 conversation_live_orders_stop = "<i>Press the Stop button below this message to stop the" \
                                 " feed.</i>"
 
@@ -384,7 +382,6 @@ refund_reason = "退款原因:\n" \
                 "{reason}"
 
 # Info: informazioni sul bot
-# TODO 
 bot_info = '版本 v1.0'
 
 # Help: guide

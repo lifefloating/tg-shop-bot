@@ -168,7 +168,6 @@ class Cart(TableDeclarativeBase):
 class Transaction(TableDeclarativeBase):
     """A TGgreed wallet transaction.
     Wallet credit ISN'T calculated from these, but they can be used to recalculate it."""
-    # TODO: split this into multiple tables
 
     # The internal transaction ID
     transaction_id = Column(Integer, primary_key=True)

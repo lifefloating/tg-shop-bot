@@ -355,7 +355,6 @@ refund_reason = "Refund reason:\n" \
                 "{reason}"
 
 # Info: informazioni sul bot
-# TODO 
 bot_info = 'This bot v1.0'
 
 # Help: guide
