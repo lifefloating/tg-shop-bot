@@ -1162,13 +1162,13 @@ class Worker(threading.Thread):
             for photo in photo_list[1:]:
                 if photo.width > largest_photo.width:
                     largest_photo = photo
-                # Get the file object associated with the photo
-                photo_file = self.bot.get_file(largest_photo.file_id)
-                # Notify the user that the bot is downloading the image and might be inactive for a while
-                self.bot.send_message(self.chat.id, self.loc.get("downloading_image"))
-                self.bot.send_chat_action(self.chat.id, action="upload_photo")
-                # Set the image for that product
-                product.set_image(photo_file)
+            # Get the file object associated with the photo
+            photo_file = self.bot.get_file(largest_photo.file_id)
+            # Notify the user that the bot is downloading the image and might be inactive for a while
+            self.bot.send_message(self.chat.id, self.loc.get("downloading_image"))
+            self.bot.send_chat_action(self.chat.id, action="upload_photo")
+            # Set the image for that product
+            product.set_image(photo_file)
         # Commit the session changes
         self.session.commit()
         # Notify the user
