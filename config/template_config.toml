@@ -52,7 +52,7 @@ con_pool_size = 10
 currency = "CNY"
 # Currency exp parameter. You can find that on https://core.telegram.org/bots/payments/currencies.json.
 # It has a value of 2 in most currencies (EUR, USD, GBP...)
-currency_exp = 2
+currency_exp = 0
 # Currency symbol which is show to the client users when displaying prices and transaction values
 # If not defined here, default language specific currency symbol from strings would be used
 currency_symbol = "CN¥"
