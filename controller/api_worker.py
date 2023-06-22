@@ -199,7 +199,6 @@ class ApiWorker(object):
         products = session.query(db.Product.id, db.Product.name, db.Product.price, db.Product.description, db.ProductImage.data)\
                         .outerjoin(db.ProductImage, db.Product.id == db.ProductImage.product_id)\
                         .filter_by(id=product_id)\
-                        .all()
 
         if not products:
             raise ValueError('product not found')
