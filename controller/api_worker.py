@@ -132,7 +132,10 @@ class ApiWorker(object):
 
     # 商品列表
     def product_list(self):
-        products = session.query(db.Product).all()
+        products = session.query(db.Product.id, db.Product.name, db.Product.price, db.Product.description, db.ProductImage.data)\
+                        .outerjoin(db.ProductImage, db.Product.id == db.ProductImage.product_id)\
+                        .group_by(db.Product.id)\
+                        .all()
 
         if not products:
             return {'success': True, 'product_list': []}
@@ -140,8 +143,8 @@ class ApiWorker(object):
         product_list = []
         for product in products:
             image_list = []
-            for image in product.image:
-                image_data = base64.b64encode(image).decode('utf-8')
+            if product.data:
+                image_data = base64.b64encode(product.data).decode('utf-8')
                 image_list.append(image_data)
             product_list.append({
                 'product_id': product.id,
