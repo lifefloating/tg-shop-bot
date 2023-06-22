@@ -193,7 +193,7 @@ class ApiWorker(object):
         return {'success': True, 'product_list': product_list}
 
 
-     # 商品列表
+     # 商品详情
     def product_detail(self, params):
         product_id = params.get('product_id')
         products = session.query(db.Product.id, db.Product.name, db.Product.price, db.Product.description, db.ProductImage.data)\
@@ -202,25 +202,30 @@ class ApiWorker(object):
                         .all()
 
         if not products:
-            raise ValueError('No product found.')
+            raise ValueError('product not found')
 
-        product_images = []
+        product_list = []
         for product in products:
-            if product.data is not None:
-                image_data_encoded = base64.b64encode(product.data).decode('utf-8')
-                product_images.append(image_data_encoded)
+            found = False
+            for item in product_list:
+                if item['product_id'] == product.id:
+                    item['product_image'].append(base64.b64encode(product.data).decode('utf-8'))
+                    found = True
+                    break
 
-        product_detail = {
-            'product_id': products[0].id,
-            'product_name': products[0].name,
-            'product_price': products[0].price,
-            'product_description': products[0].description,
-            'product_image': product_images
-        }
+            if not found:
+                product_list.append({
+                    'product_id': product.id,
+                    'product_name': product.name,
+                    'product_price': product.price,
+                    'product_description': product.description,
+                    'product_image': [base64.b64encode(product.data).decode('utf-8')] if product.data is not None else []
+                })
 
         session.close()
+        result = product_list[0]
 
-        return {'success': True, 'product': product_detail}
+        return {'success': True, 'product': result}
 
 
     
