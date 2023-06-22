@@ -196,7 +196,7 @@ class ApiWorker(object):
      # 商品详情
     def product_detail(self, params):
         product_id = params.get('product_id')
-        products = session.query(db.Product.id, db.Product.name, db.Product.price, db.Product.description, db.ProductImage.data)\
+        products = session.query(db.Product)\
                         .outerjoin(db.ProductImage, db.Product.id == db.ProductImage.product_id)\
                         .filter_by(id=product_id)\
                         .all()
