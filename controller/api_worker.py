@@ -29,6 +29,7 @@ class ApiWorker(object):
     def add_cart(self, params):
         user_id = params.get('user_id')
         product_id = params.get('product_id')
+        product_id = int(product_id)
         quantity = params.get('quantity')
 
         if not user_id or not product_id:
@@ -56,6 +57,7 @@ class ApiWorker(object):
     def remove_cart(self, params):
         user_id = params.get('user_id')
         product_id = params.get('product_id')
+        product_id = int(product_id)
 
         if not user_id or not product_id:
             raise ValueError('User ID and product_id are required.')
@@ -198,6 +200,7 @@ class ApiWorker(object):
      # 商品详情
     def product_detail(self, params):
         product_id = params.get('product_id')
+        product_id = int(product_id)
         # 查询有问题，改成内存筛选
         products = session.query(db.Product.id, db.Product.name, db.Product.price, db.Product.description, db.ProductImage.data)\
                         .outerjoin(db.ProductImage, db.Product.id == db.ProductImage.product_id)\
@@ -242,6 +245,7 @@ class ApiWorker(object):
         with session as sess:
             user_id = params.get('user_id')
             product_id = params.get('product_id')
+            product_id = int(product_id)
             quantity = params.get('quantity')
             notes = params.get('notes')
             if not notes:
